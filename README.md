@@ -7,16 +7,15 @@
 **mac**: [MacTeX](https://www.tug.org/mactex/)
 
 
-
 ### 文件说明
 
 目录说明如下：
 
 * seu-undergraduate: 本科
-
 * seu-master: 研究生学硕
-
 * seu-engineering: 研究生专硕
+* seu-phd: 博士
+* rules.pdf: 东南大学研究生学位论文的格式规定 
 
 ### 常见问题以及解决办法
 
@@ -46,7 +45,25 @@
 
   图片生成完成。当然使用其他专业工具matlab等也可以直接生成eps。
 
+* 公式书写
+
+  常用符号Latex表示方法：[链接](https://www.mohu.org/info/symbols/symbols.htm)
+
+  Latex数学公式在线编辑器：[链接](https://www.codecogs.com/latex/eqneditor.php?lang=zh-cn)
+
+* 多出空白页问题
+
+  由于模板限制奇偶页，会生成多余的空白页。可以通过如下命令去掉空白页生成：
+
+  ```latex
+  \let\cleardoublepage\clearpage % 去除空白页
+  ```
+
+  放在章节命令之前，或\begin{abstract}等也可以。
+
 * 其他问题
 
   基本问题都能搜索的到解决方案，善用搜索引擎。
+
+  
 
