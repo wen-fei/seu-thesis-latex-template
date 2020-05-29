@@ -6,8 +6,13 @@
 
 **mac**: [MacTeX](https://www.tug.org/mactex/)
 
-
 ### 文件说明
+
+主要配置文件说明如下：
+
+* seuthesix.cls: 核心配置文件
+* seuthesix.cfg: seuthesix.cls运行时加载此配置文件
+* seuthesix.cls：风格文件
 
 目录说明如下：
 
@@ -27,7 +32,7 @@
 
   （2） 修改TeXstudio编译器，lualatex编译一次，再用pdflatex编译。修改编译器方法如下：选项->设置TeXstudio，如下图所示：
 
-  ![]()
+  ![](https://github.com/wen-fei/seu-thesis-latex-template/blob/master/img/TeXstudio_bold.png)
 
 
 * 写表格麻烦问题
@@ -65,5 +70,9 @@
 
   基本问题都能搜索的到解决方案，善用搜索引擎。
 
-  
 
+### 参考
+
+1. [seuthesix](https://github.com/zhimengfan1990/seuthesix)
+
+2. [SEUThesis](https://github.com/JosanSun/SEUThesis)
