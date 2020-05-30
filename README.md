@@ -1,5 +1,7 @@
 ## 东南大学毕业论文latex模板
 
+感谢[seuthesix](https://github.com/zhimengfan1990/seuthesix)提供的模板，本仓库基于其进行二次加工和处理。
+
 ### 推荐编辑器
 
 **windows**：[Texstudio](https://sourceforge.net/projects/texstudio/)
@@ -12,7 +14,10 @@
 
 * seuthesix.cls: 核心配置文件
 * seuthesix.cfg: seuthesix.cls运行时加载此配置文件
-* seuthesix.cls：风格文件
+* seuthesix.bst：风格文件
+* seuthesix.bib: 参考文献引用存放文件
+
+其他文件大多为编译生成的，如果要新建自己的项目，拷贝这四个主要文件和图片目录即可。
 
 目录说明如下：
 
@@ -32,7 +37,7 @@
 
   （2） 修改TeXstudio编译器，lualatex编译一次，再用pdflatex编译。修改编译器方法如下：选项->设置TeXstudio，如下图所示：
 
-  ![](https://github.com/wen-fei/seu-thesis-latex-template/blob/master/img/TeXstudio_bold.png)
+  ![](https://github.com/wen-fei/seu-thesis-latex-template/blob/master/img/TeXstudio_bold.png?raw=true)
 
 
 * 写表格麻烦问题
