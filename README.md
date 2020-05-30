@@ -21,7 +21,7 @@
 
 目录说明如下：
 
-* seu-undergraduate: 本科
+* seu-bachelor: 本科 TODO
 * seu-master: 研究生学硕
 * seu-engineering: 研究生专硕
 * seu-phd: 博士
