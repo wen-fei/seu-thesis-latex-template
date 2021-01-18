@@ -454,8 +454,8 @@ FUNCTION {format.year.month.day}
 		  {"There is year and day, but no month." warning$ 
 		  year "-" * "[" *
 		  language missing$
-		  {month empty}
-		  {缺少月份}
+		  {"month empty"}
+		  {"缺少月份"}
 		  if$
 		  "]-" * day *
 		  }
