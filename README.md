@@ -71,6 +71,12 @@
 
   放在章节命令之前，或\begin{abstract}等也可以。
 
+* 术语与符号约定无法自动生成问题
+
+  打开tex文件根目录，shift+右键选择shell运行
+  makeindex <filename>.nlo -s nomencl.ist -o <filename>.nls
+  在tex编译器中生成pdf
+
 * 其他问题
 
   基本问题都能搜索的到解决方案，善用搜索引擎。
