@@ -74,7 +74,9 @@
 * 术语与符号约定无法自动生成问题
 
   打开tex文件根目录，shift+右键选择shell运行
+  ```latex
   makeindex <filename>.nlo -s nomencl.ist -o <filename>.nls
+  ```
   在tex编译器中生成pdf
 
 * 其他问题
