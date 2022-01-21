@@ -659,7 +659,7 @@ chapter/titleformat=\large\heiti
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{致 谢}
-\chapter*{致 谢}
+\chapter*{致 谢\markboth{致 谢}{}}
 }
 
 \newcommand{\thesisbib}[1]{%
