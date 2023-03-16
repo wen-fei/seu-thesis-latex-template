@@ -12,19 +12,19 @@
 
 主要配置文件说明如下：
 
+* figures: 图片目录
 * seuthesix.cls: 核心配置文件
 * seuthesix.cfg: seuthesix.cls运行时加载此配置文件
-* seuthesix.bib: 参考文献引用存放文件
 * gbt7714-2005.bst：[《GB/T 7714-2005: 文后参考文献著录规则》](https://github.com/Haixing-Hu/GBT7714-2005-BibTeX-Style)
 
-其他文件大多为编译生成的，如果要新建自己的项目，拷贝这四个主要文件和图片目录即可。
+其他文件大多为编译生成的，如果要新建自己的项目，拷贝这3个主要文件和图片目录即可。
 
-目录说明如下：
+样例文件说明如下：
 
-* seu-bachelor: 本科 TODO
-* seu-master: 研究生学硕
-* seu-engineering: 研究生专硕
-* seu-phd: 博士
+* sample_master.tex: 研究生学硕
+* sample_engineering.tex: 研究生专硕
+* sample_phd.tex: 博士
+* sample.bib: 参考文献引用存放文件
 * rules.pdf: 东南大学研究生学位论文的格式规定 
 
 ### 常见问题以及解决办法
