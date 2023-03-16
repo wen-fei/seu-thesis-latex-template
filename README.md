@@ -21,9 +21,7 @@
 
 样例文件说明如下：
 
-* sample_master.tex: 研究生学硕
-* sample_engineering.tex: 研究生专硕
-* sample_phd.tex: 博士
+* sample.tex: 模板，首行选项（engineering, masters, phd）
 * sample.bib: 参考文献引用存放文件
 * rules.pdf: 东南大学研究生学位论文的格式规定 
 

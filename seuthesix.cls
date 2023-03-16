@@ -45,6 +45,17 @@
 \DeclareOption{nomlist}{\nomlisttrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexrep}}
 \ProcessOptions
+\ifmasters
+  \newcommand{\seut@dagree@zh}{硕士}
+  \newcommand{\seut@dagree@en}{Master}
+\else
+  \ifphd
+    \newcommand{\seut@dagree@zh}{博士}
+    \newcommand{\seut@dagree@en}{Doctor}
+  \else
+    \ClassError{seuthesix}{No degree was selected.}{}
+  \fi
+\fi
 \LoadClass[twoside,a4paper,zihao=-4,UTF8,openright]{ctexrep}
 \RequirePackage[titles]{tocloft}
 \renewcommand{\cftchapleader}{\bfseries\cftdotfill{\cftdotsep}}
@@ -363,7 +374,7 @@
       \setlength{\tabcolsep}{10pt}
       \renewcommand{\arraystretch}{2.0}
       \begin{tabular}{ll}
-        \CoverBottomOption{\appdegreepre}{\@degreetype}                  &
+        \CoverBottomOption{\appdegreepre}{\@degreetype\seut@dagree@zh}   &
         \CoverBottomOption{\authorizeorganizationpre}{\@authorizeorganization}                                                 \\
         \CoverBottomOption{\majorpre}{\@major}                           &
         \CoverBottomOption{\defenddatepre}{\@defenddate}                                                                       \\
@@ -468,7 +479,7 @@
     \setlength{\tabcolsep}{10pt}
     \renewcommand{\arraystretch}{2.0}
     \begin{tabular}{ll}
-      \CoverBottomOption{\appdegreepre}{\@degreetype}                  &
+      \CoverBottomOption{\appdegreepre}{\@degreetype\seut@dagree@zh}   &
       \CoverBottomOption{\authorizeorganizationpre}{\@authorizeorganization}                                                 \\
       \CoverBottomOption{\majorpre}{\@major}                           &
       \CoverBottomOption{\defenddatepre}{\@defenddate}                                                                       \\
@@ -548,7 +559,7 @@
       \fi
       submitted to}\\
     {\universitynameeng}\\
-    {For the Academic Degree of \@degreetypeen}\\
+    {For the Academic Degree of \seut@dagree@en\ of \@degreetypeen}\\
     {\vspace{0.5in}}%
     {BY}\\
     {\@authoreng}\\
@@ -670,11 +681,11 @@
   \bibliography{#1}
 }
 
-\newcommand{\resume}[1]{%
+\newcommand{\resume}{%
   \cleardoublepage
   \phantomsection
-  \addcontentsline{toc}{chapter}{#1}
-  \chapter*{#1}
+  \addcontentsline{toc}{chapter}{作者攻读\seut@dagree@zh 学位期间的研究成果}
+  \chapter*{作者攻读\seut@dagree@zh 学位期间的研究成果}
 }
 
 \newcommand{\seuthesix}{%
