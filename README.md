@@ -14,8 +14,8 @@
 
 * seuthesix.cls: 核心配置文件
 * seuthesix.cfg: seuthesix.cls运行时加载此配置文件
-* seuthesix.bst：风格文件
 * seuthesix.bib: 参考文献引用存放文件
+* gbt7714-2005.bst：[《GB/T 7714-2005: 文后参考文献著录规则》](https://github.com/Haixing-Hu/GBT7714-2005-BibTeX-Style)
 
 其他文件大多为编译生成的，如果要新建自己的项目，拷贝这四个主要文件和图片目录即可。
 
@@ -81,3 +81,6 @@
 1. [seuthesix](https://github.com/zhimengfan1990/seuthesix)
 
 2. [SEUThesis](https://github.com/JosanSun/SEUThesis)
+
+3. [GBT7714-2005-BibTeX-Style](https://github.com/Haixing-Hu/GBT7714-2005-BibTeX-Style)
+

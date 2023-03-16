@@ -663,7 +663,7 @@ chapter/titleformat=\large\heiti
 }
 
 \newcommand{\thesisbib}[1]{%
-\bibliographystyle{seuthesix}
+\bibliographystyle{gbt7714-2005}
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{\bibname}
