@@ -21,9 +21,9 @@
 
 样例文件说明如下：
 
+* format: 东南大学研究生学位论文的格式规定 
 * sample.tex: 模板，首行选项（engineering, masters, phd）
 * sample.bib: 参考文献引用存放文件
-* rules.pdf: 东南大学研究生学位论文的格式规定 
 
 ### 常见问题以及解决办法
 
