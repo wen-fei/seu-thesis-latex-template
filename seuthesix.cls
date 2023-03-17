@@ -134,15 +134,6 @@
   menucolor=red,
   urlcolor=magenta
 }
-\AtEndDocument{\backcover}
-\newcommand{\backcover}{
-  \clearpage\thispagestyle{empty}\cleardoublepage\mbox{ }
-  \clearpage\thispagestyle{empty} %backcover always at even page.
-  \begin{picture}(0,0)
-    \put(-1,-22){ %
-      \includegraphics[width=\textwidth]{figures/back-cover.png}}
-  \end{picture}
-}
 
 \RequirePackage[top=1.2in,bottom=1in,left=2.5cm,right=2.5cm,a4paper]{geometry}
 \RequirePackage{fancyhdr}
@@ -268,96 +259,6 @@
   }
 
   \thispagestyle{empty}
-  \AddToShipoutPictureFG*{\setlength{\unitlength}{1cm}\put(1,26){%
-      \renewcommand{\arraystretch}{1.0}
-      \begin{tabular}{l}
-        \CoverTopOption{\schoolcodepre}{\schoolcode}          \\
-        \CoverTopOption{\categorynumberpre}{\@categorynumber} \\
-        \CoverTopOption{\secretlevelpre}{\@secretlevel}       \\
-        \CoverTopOption{U D C}{\@UDC}                         \\
-        \CoverTopOption{\studentidpre}{\@studentid}
-      \end{tabular}
-    }
-  }
-
-  \AddToShipoutPictureBG*{\setlength{\unitlength}{1cm}\put(0,23){%
-      \parbox{\paperwidth}{\centering\includegraphics[width=\paperwidth]{figures/front-cover.jpg}}}}%
-
-  \ifengineering
-    \AddToShipoutPictureBG*{\setlength{\unitlength}{1cm}\put(0,18){ %
-        \parbox{\paperwidth}{\centering\includegraphics[scale=0.65]{figures/engineering.png}}}}%
-  \else \ifmasters
-      \AddToShipoutPictureBG*{\setlength{\unitlength}{1cm}\put(0,18){ %
-          \parbox{\paperwidth}{\centering\includegraphics[scale=1.1]{figures/master-hwzs.pdf}}}}%
-    \else \ifphd
-        \AddToShipoutPictureBG*{\setlength{\unitlength}{1cm}\put(0,18){ %
-            \parbox{\paperwidth}{\centering\includegraphics[scale=1.1]{figures/doctor-hwzs.pdf}}}}%
-      \else
-        \ClassError{seuthesix}{invalid degree type option.}%
-        {Check your class option of degree type to be one of the following:%
-          masters, engineering, phd.}
-      \fi
-    \fi
-  \fi
-  \AddToShipoutPictureBG*{\setlength{\unitlength}{1cm}\put(17,27){%
-      \parbox{\paperwidth}{\includegraphics[width=2cm]{figures/seu-color-logo.png}}}}%
-
-  \vspace*{8cm}
-
-  \begin{center}
-    \linespread{1.25}
-    \yihao\heiti\@title\\
-    \yihao\heiti\@subtitle
-  \end{center}
-
-  \begin{center}
-    \setlength{\tabcolsep}{0pt}
-    \renewcommand{\arraystretch}{2.0}
-    \begin{tabular}{cr}
-      \makebox[3.5cm][s]{\xiaoerhao\songti\authorpre: }  &
-      \underline{\makebox[6cm][s]{
-          \hspace*{1cm}
-          \makebox[2.5cm][c]{\xiaoerhao\heiti\@author}
-      \makebox[2cm][r]{}}}                                 \\
-      \makebox[3.5cm][s]{\xiaoerhao\songti\advisorpre: } &
-      \underline{\makebox[6cm][s]{
-          \hspace*{1cm}
-          \makebox[2.5cm][c]{\xiaoerhao\heiti\@advisorname}
-          \makebox[2cm][r]{\xiaoerhao\heiti\@advisortitle}}}
-      \\
-                                                         &
-      \ifcoadvisor
-        \underline{\makebox[6cm][s]{
-            \hspace*{1cm}
-            \makebox[2.5cm][c]{\xiaoerhao\heiti\@coadvisorname}
-            \makebox[2cm][r]{\xiaoerhao\heiti\@coadvisortitle}}}
-      \else
-      \fi                                                  \\
-    \end{tabular}
-  \end{center}
-
-  \begin{center}
-    \setlength{\tabcolsep}{10pt}
-    \renewcommand{\arraystretch}{2.0}
-    \begin{tabular}{ll}
-      \CoverBottomOption{\appdegreepre}{\@degreetype\seut@dagree@zh}   &
-      \CoverBottomOption{\authorizeorganizationpre}{\@authorizeorganization}                                                 \\
-      \CoverBottomOption{\majorpre}{\@major}                           &
-      \CoverBottomOption{\defenddatepre}{\@defenddate}                                                                       \\
-      \CoverBottomOption{\submajorpre}{\@submajor}                     &
-      \CoverBottomOption{\authorizedatepre}{\@authorizedate}                                                                 \\
-      \CoverBottomOption[4.05cm]{\committeechairpre}{\@committeechair} &
-      \CoverBottomOption{\reviewerpre}{\@reviewerA}                                                                          \\
-                                                                       & \CoverBottomOption{\makebox[2.55cm]{}}{\@reviewerB}
-    \end{tabular}
-  \end{center}
-
-  \vfill
-  \setcounter{page}{1}
-  {\songti\sihao\centerline{\today} \par}
-
-  \clearpage\thispagestyle{empty}\cleardoublepage%
-  \thispagestyle{empty}
   \begin{center}
     \xiaochuhao
 
@@ -440,6 +341,42 @@
     }%
   \end{center}%
 
+}
+
+\newcommand{\seudeclare}{
+  \clearpage\thispagestyle{empty}\cleardoublepage\thispagestyle{empty}
+  {\xiaosihao
+    \begin{center}
+      {\heiti\sanhao 东南大学学位论文独创性声明}
+    \end{center}
+    \vspace{0.5in}
+    { \linespread{1.5}
+      本人声明所呈交的学位论文是我个人在导师指导下进行的研究工作及取得的
+      研究成果。尽我所知，除了文中特别加以标注和致谢的地方外，论文中不包
+      含其他人已经发表或撰写过的研究成果，也不包含为获得东南大学或其它教
+      育机构的学位或证书而使用过的材料。与我一同工作的同志对本研究所做的
+      任何贡献均已在论文中作了明确的说明并表示了谢意。\par}
+    \vspace{0.3in}
+    \begin{flushright}
+      研究生签名：\signline 日~期：\signline
+    \end{flushright}
+    \vspace{1.5in}
+    \begin{center}
+      {\heiti\sanhao 东南大学学位论文使用授权声明}
+    \end{center}
+    \vspace{0.5in}
+    { \linespread{1.5}
+      东南大学、中国科学技术信息研究所、国家图书馆有权保留本人所送交学位
+      论文的复印件和电子文档，可以采用影印、缩印或其他复制手段保存论文。
+      本人电子文档的内容和纸质论文的内容相一致。除在保密期内的保密论文
+      外，允许论文被查阅和借阅，可以公布（包括刊登）论文的全部或部分内容。
+      论文的公布（包括刊登）授权东南大学研究生院办理。\par}
+    \vspace{0.3in}
+    \begin{flushright}
+      研究生签名：\signline 导师签名：\signline 日~期：\signline
+    \end{flushright}
+    \par
+  }
 }
 
 \newcommand\makecover{%
@@ -549,13 +486,5 @@
   \chapter*{作者攻读\seut@dagree@zh 学位期间的研究成果}
 }
 
-\newcommand{\seuthesix}{%
-  \makebox{S\hspace{-0.3ex}\raisebox{-0.5ex}{E}\hspace{-0.3ex}U\hspace{0.1em}%
-    \textsc{Thesix}}
-}
-\newcommand{\seuthesis}{%
-  \makebox{S\hspace{-0.3ex}\raisebox{-0.5ex}{E}\hspace{-0.3ex}U\hspace{0.1em}%
-    \textsc{Thesis}}
-}
 \endinput
 %% End of file `seuthesix.cls'.
