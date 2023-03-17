@@ -31,34 +31,40 @@
 \newif\iffigurelist\figurelistfalse
 \newif\iftablelist\tablelistfalse
 \newif\ifnomlist\nomlistfalse
-\InputIfFileExists{seuthesix.cfg}
-{\typeout{[seuthesix]: Load seuthesix.cfg successfully!}}%
-{\typeout{[seuthesix]: Load seuthesix.cfg failed!}}%
 \DeclareOption{nocolorlinks}{\nocolorlinkstrue}
-\DeclareOption{algorithmlist}{\algorithmlisttrue}
-\DeclareOption{phd}{\phdtrue\mastersfalse\engineeringfalse\renewcommand\@degreelevel{博士}}
-\DeclareOption{masters}{\masterstrue\engineeringfalse\phdfalse\renewcommand\@degreelevel{硕士}}
+\DeclareOption{phd}{\phdtrue\mastersfalse\engineeringfalse}
+\DeclareOption{masters}{\masterstrue\engineeringfalse\phdfalse}
 \DeclareOption{engineering}{%
-  \engineeringtrue\masterstrue\phdfalse\renewcommand\@degreelevel{工程硕士}}
+  \engineeringtrue\masterstrue\phdfalse}
+\DeclareOption{algorithmlist}{\algorithmlisttrue}
 \DeclareOption{figurelist}{\figurelisttrue}
 \DeclareOption{tablelist}{\tablelisttrue}
 \DeclareOption{nomlist}{\nomlisttrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexrep}}
 \ProcessOptions
+
+\InputIfFileExists{seuthesix.cfg}
+{\typeout{[seuthesix]: Load seuthesix.cfg successfully!}}%
+{\typeout{[seuthesix]: Load seuthesix.cfg failed!}}%
 \ifmasters
   \newcommand{\seut@dagree@zh}{硕士}
   \newcommand{\seut@dagree@en}{Master}
+  \ifengineering
+    \renewcommand\@degreelevel{工程硕士}
+  \else
+    \renewcommand\@degreelevel{硕士}
+  \fi
 \else
   \ifphd
     \newcommand{\seut@dagree@zh}{博士}
     \newcommand{\seut@dagree@en}{Doctor}
+    \renewcommand\@degreelevel{博士}
   \else
     \ClassError{seuthesix}{No degree was selected.}{}
   \fi
 \fi
+
 \LoadClass[twoside,a4paper,zihao=-4,UTF8,openright]{ctexrep}
-\RequirePackage[titles]{tocloft}
-\renewcommand{\cftchapleader}{\bfseries\cftdotfill{\cftdotsep}}
 \newcommand{\chuhao}{\fontsize{42bp}{46bp}\selectfont}
 \newcommand{\xiaochuhao}{\fontsize{36bp}{40bp}\selectfont}
 \newcommand{\yichu}{\fontsize{32bp}{36bp}\selectfont}
@@ -89,11 +95,18 @@
   listfigurename={插图目录},
   listtablename={表格目录}
 }
+
+% controlling the typographic design of the Table of Contents, ...
+\RequirePackage[titles]{tocloft}
+\renewcommand{\cftchapleader}{\bfseries\cftdotfill{\cftdotsep}}
+% 处理浮动图形和表格的标题样式
 \RequirePackage[font=small]{caption}
-%\RequirePackage{mathptmx}
 \setmainfont[Mapping=tex-text]{Times New Roman}
+% amsmath 宏包提供数学公式支持
 \RequirePackage{amsmath}
+% 提供数学符号和字体支持
 \RequirePackage{amssymb}
+% amsthm 宏包支持自定义数学定理环境
 \RequirePackage{amsthm}
 \numberwithin{equation}{chapter}
 \newcommand{\dif}{\mathrm{d}}
@@ -104,22 +117,29 @@
 \DeclareMathOperator{\sinc}{sinc}
 \DeclareMathOperator{\unwrap}{unwrap}
 \def\me{\mathrm{e}}
-\RequirePackage[mathscr]{eucal}
-\RequirePackage{eufrak}
+% 提供数学符号和字体支持
+\RequirePackage{amsfonts}
+% 提供数学符号和字体支持
 \RequirePackage{bm}
+% 使用graphicx 宏包支持插入图片。
 \RequirePackage{graphicx}
 \graphicspath{{figures/}{./}}
+% Produces lists of symbols
 \RequirePackage{nomencl}
 \makenomenclature
 \newcommand{\setnomname}[1]{\renewcommand\nomname{#1}}
 \renewcommand{\nomname}{术语与数学符号约定}
+% float wrapper for algorithms
 \RequirePackage{algorithm}
+% first algorithm typesetting environment
 \RequirePackage{algorithmic}
 \numberwithin{algorithm}{chapter}
 \floatname{algorithm}{算法}
 \renewcommand{\listalgorithmname}{算法目录}
+% Flexible bibliography support
 \RequirePackage[super,square]{natbib}
 \newcommand\citen[1]{[\!\!\citenum{#1}]}
+% 可根据交叉引用生成超链接
 \RequirePackage{hyperref}
 \ifnocolorlinks
   \hypersetup{colorlinks=false}
@@ -135,7 +155,9 @@
   urlcolor=magenta
 }
 
+% 使用geometry 宏包定义页面布局，定义段间距。
 \RequirePackage[top=1.2in,bottom=1in,left=2.5cm,right=2.5cm,a4paper]{geometry}
+% 支持自定义页眉页脚
 \RequirePackage{fancyhdr}
 \fancypagestyle{seustyle}{%
   \fancyhf{}
@@ -153,6 +175,7 @@
 }
 
 \renewcommand{\headrulewidth}{0.4pt}
+% Add picture commands (or backgrounds) to every page
 \RequirePackage{eso-pic}
 \renewcommand{\author}[2]{
   \def\@author{#1}
