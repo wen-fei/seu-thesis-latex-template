@@ -136,14 +136,14 @@
 % 设置页眉页脚格式
 \fancypagestyle{seustyle}{%
   \fancyhf{}
-  \fancyhead[CO]{\xiaowuhao\universityname{}\@thesistype}
-  \fancyhead[CE]{ \xiaowuhao\leftmark}
+  \fancyhead[CE]{\xiaowuhao\universityname{}\@thesistype}
+  \fancyhead[CO]{ \xiaowuhao\leftmark}
   \fancyfoot[CO,CE]{\thepage}
 }
 \fancypagestyle{nom}{%
   \fancyhf{}
-  \fancyhead[CO]{\xiaowuhao\universityname{}\@thesistype}
-  \fancyhead[CE]{ \xiaowuhao\nomname}
+  \fancyhead[CE]{\xiaowuhao\universityname{}\@thesistype}
+  \fancyhead[CO]{ \xiaowuhao\nomname}
   \fancyfoot[CO,CE]{\thepage}
 }
 
