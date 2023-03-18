@@ -46,12 +46,12 @@
 \DeclareOption{figurelist}{\seut@opt@figurelisttrue}
 \DeclareOption{tablelist}{\seut@opt@tablelisttrue}
 \DeclareOption{nomlist}{\seut@opt@nomlisttrue}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexrep}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ProcessOptions
 
 %% 加载基类
 
-\LoadClass[twoside,a4paper,zihao=-4,UTF8,openright]{ctexrep}
+\LoadClass[twoside,a4paper,zihao=-4,UTF8,openright]{ctexbook}
 
 %% 加载宏包
 
@@ -143,9 +143,6 @@
   \fancyhead[CE]{ \xiaowuhao\nomname}
   \fancyfoot[CO,CE]{\thepage}
 }
-% 设置当前格式
-\pagestyle{seustyle}
-\renewcommand{\headrulewidth}{0.4pt}
 
 %% 导入配置
 
@@ -439,18 +436,20 @@
   \makechinesecover
   \makeenglishcover
   \seudeclare
+  % 设置后续格式
+  \clearpage\thispagestyle{empty}\cleardoublepage
+  \pagestyle{seustyle}
+  \renewcommand{\headrulewidth}{0.4pt}
 }
 
-\renewenvironment{abstract}[1]
+\newenvironment{abstract}[1]
 {
   \pagenumbering{Roman}
-  \clearpage\thispagestyle{empty}\cleardoublepage\thispagestyle{plain}
+  \thispagestyle{plain}
   \newcommand{\@keywords}{#1}
   \hypersetup{pdfkeywords={\@keywords}}
   \phantomsection
-  \addcontentsline{toc}{chapter}{\@abstracttitle}
-  \chapter*{\@abstracttitle}
-  \setcounter{page}{1}
+  \chapter{\@abstracttitle}
 }
 {
   \par
@@ -464,12 +463,11 @@
   \cleardoublepage\thispagestyle{plain}
   \newcommand{\@keywords}{#1}
   \phantomsection
-  \addcontentsline{toc}{chapter}{Abstract}
   \ctexset{%
     chapter/nameformat=\large\bfseries,
     chapter/titleformat=\large\bfseries
   }
-  \chapter*{Abstract}
+  \chapter{Abstract}
   \ctexset{%
     chapter/nameformat=\large\heiti,
     chapter/titleformat=\large\heiti
@@ -480,6 +478,17 @@
   \begin{description}
     \item[Keywords:] \@keywords
   \end{description}
+}
+
+\renewcommand*{\tableofcontents}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter{\contentsname}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
 }
 
 \newcommand\listofothers{%
@@ -510,21 +519,15 @@
     \addcontentsline{toc}{chapter}{\nomname}
     \pagestyle{nom}
     \printnomenclature[1in]
+    \pagestyle{seustyle}
   \fi
 
-}
-
-\newcommand{\mainmatter}{%
-  \cleardoublepage
-  \pagenumbering{arabic}
-  \pagestyle{seustyle}
 }
 
 \newcommand{\acknowledgement}{%
   \cleardoublepage
   \phantomsection
-  \addcontentsline{toc}{chapter}{致 谢}
-  \chapter*{致 谢}
+  \chapter{致 谢}
 }
 
 \newcommand{\thesisbib}[1]{%
@@ -538,8 +541,7 @@
 \newcommand{\resume}{%
   \cleardoublepage
   \phantomsection
-  \addcontentsline{toc}{chapter}{作者攻读\seut@dagree@zh 学位期间的研究成果}
-  \chapter*{作者攻读\seut@dagree@zh 学位期间的研究成果}
+  \chapter{作者简介}
 }
 
 \endinput

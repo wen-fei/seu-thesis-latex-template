@@ -1,14 +1,14 @@
-## 东南大学毕业论文latex模板
+# 东南大学毕业论文latex模板
 
 感谢[seuthesix](https://github.com/zhimengfan1990/seuthesix)提供的模板，本仓库基于其进行二次加工和处理。
 
-### 推荐编辑器
+## 推荐编辑器
 
 **windows**：[Texstudio](https://sourceforge.net/projects/texstudio/)
 
 **mac**: [MacTeX](https://www.tug.org/mactex/)
 
-### 文件说明
+## 文件说明
 
 主要配置文件说明如下：
 
@@ -36,7 +36,44 @@
   * tablelist: 表格目录
   * nomlist: 术语与数学符号约定
 
-### 常见问题以及解决办法
+文章基本结构（见`sample.tex`）：
+
+```latex
+% 中英文页面和独创性声明
+\makecover
+
+%% 正文前的内容
+\frontmatter
+
+% 中文摘要
+\begin{abstract}{xxx}
+\end{abstract}
+% 英文摘要
+\begin{englishabstract}{xxx}
+\end{englishabstract}
+% 目录
+\tableofcontents
+% 目录后内容
+\listofothers
+
+%% 正文
+\mainmatter
+
+
+%% 正文后的内容
+\backmatter
+
+% 致谢
+\acknowledgement
+% 参考文献
+\thesisbib{xxx}
+% 附录
+\appendix
+% 作者简介
+\resume
+```
+
+## 常见问题以及解决办法
 
 * 中文加粗问题
 
@@ -85,7 +122,7 @@
   基本问题都能搜索的到解决方案，善用搜索引擎。
 
 
-### 参考
+## 参考
 
 1. [seuthesix](https://github.com/zhimengfan1990/seuthesix)
 
