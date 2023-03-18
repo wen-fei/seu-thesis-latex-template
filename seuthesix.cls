@@ -49,9 +49,141 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexrep}}
 \ProcessOptions
 
+%% 加载基类
+
+\LoadClass[twoside,a4paper,zihao=-4,UTF8,openright]{ctexrep}
+
+%% 加载宏包
+
+% 使用geometry 宏包定义页面布局，定义段间距。
+\RequirePackage[top=1.2in,bottom=1in,left=2.5cm,right=2.5cm,a4paper]{geometry}
+% 使用graphicx 宏包支持插入图片。
+\RequirePackage{graphicx}
+\graphicspath{{figures/}{./}}
+% controlling the typographic design of the Table of Contents, ...
+\RequirePackage[titles]{tocloft}
+\renewcommand{\cftchapleader}{\bfseries\cftdotfill{\cftdotsep}}
+% 处理浮动图形和表格的标题样式
+\RequirePackage[font=small]{caption}
+% amsmath 宏包提供数学公式支持
+\RequirePackage{amsmath}
+% amsthm 宏包支持自定义数学定理环境
+\RequirePackage{amsthm}
+\numberwithin{equation}{chapter}
+% 提供数学符号和字体支持
+\RequirePackage{amssymb}
+% 提供数学符号和字体支持
+\RequirePackage{amsfonts}
+% 提供数学符号和字体支持
+\RequirePackage{bm}
+% Produces lists of symbols
+\RequirePackage{nomencl}
+\makenomenclature
+\renewcommand{\nomname}{术语与数学符号约定}
+% float wrapper for algorithms
+\RequirePackage{algorithm}
+% first algorithm typesetting environment
+\RequirePackage{algorithmic}
+\numberwithin{algorithm}{chapter}
+\floatname{algorithm}{算法}
+\renewcommand{\listalgorithmname}{算法目录}
+% Flexible bibliography support
+\RequirePackage[super,square]{natbib}
+% 可根据交叉引用生成超链接
+\RequirePackage{hyperref}
+% 支持自定义页眉页脚
+\RequirePackage{fancyhdr}
+% Add picture commands (or backgrounds) to every page
+\RequirePackage{eso-pic}
+
+%% 基本配置
+
+% 字体设置
+\setCJKmainfont{SimSun}
+\setmainfont[Mapping=tex-text]{Times New Roman}
+\ctexset{%
+  chapter/format=\centering,
+  chapter/nameformat=\large\heiti,
+  chapter/numberformat=\large\heiti,
+  chapter/titleformat=\large\heiti,
+  chapter/beforeskip=0pt,
+  section/format=\raggedright,
+  section/nameformat={\large\bfseries},
+  section/numberformat={\large\bfseries},
+  section/titleformat={\sihao\bfseries},
+  subsection/format=\sihao\mdseries\raggedright,
+  subsubsection/format=\sihao\mdseries\raggedright,
+  listfigurename={插图目录},
+  listtablename={表格目录}
+}
+% 设置超链接格式
+\ifseut@opt@nocolorlinks
+  \hypersetup{colorlinks=false}
+\else
+  \hypersetup{colorlinks=true}
+\fi
+\hypersetup{
+  linkcolor=blue,
+  anchorcolor=black,
+  citecolor=red,
+  filecolor=magenta,
+  menucolor=red,
+  urlcolor=magenta
+}
+% 设置页眉页脚格式
+\fancypagestyle{seustyle}{%
+  \fancyhf{}
+  \fancyhead[CO]{\xiaowuhao\universityname{}\@thesistype}
+  \fancyhead[CE]{ \xiaowuhao\leftmark}
+  \fancyfoot[CO,CE]{\thepage}
+}
+\fancypagestyle{nom}{%
+  \fancyhf{}
+  \fancyhead[CO]{\xiaowuhao\universityname{}\@thesistype}
+  \fancyhead[CE]{ \xiaowuhao\nomname}
+  \fancyfoot[CO,CE]{\thepage}
+}
+% 设置当前格式
+\pagestyle{seustyle}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%% 导入配置
+
 \InputIfFileExists{seuthesix.cfg}
 {\typeout{[seuthesix]: Load seuthesix.cfg successfully!}}%
 {\typeout{[seuthesix]: Load seuthesix.cfg failed!}}%
+
+%% 定义常量和变量
+
+% 字号指令
+\newcommand{\chuhao}{\fontsize{42bp}{46bp}\selectfont}
+\newcommand{\xiaochuhao}{\fontsize{36bp}{40bp}\selectfont}
+\newcommand{\yichu}{\fontsize{32bp}{36bp}\selectfont}
+\newcommand{\yihao}{\fontsize{28bp}{32bp}\selectfont}
+\newcommand{\erhao}{\fontsize{21bp}{24bp}\selectfont}
+\newcommand{\xiaoerhao}{\fontsize{18bp}{20bp}\selectfont}
+\newcommand{\sanhao}{\fontsize{15.75bp}{18bp}\selectfont}
+\newcommand{\sihao}{\fontsize{14bp}{16bp}\selectfont}
+\newcommand{\xiaosihao}{\fontsize{12bp}{14bp}\selectfont}
+\newcommand{\wuhao}{\fontsize{10.5bp}{13bp}\selectfont}
+\newcommand{\xiaowuhao}{\fontsize{9bp}{11bp}\selectfont}
+\newcommand{\liuhao}{\fontsize{7.5bp}{9bp}\selectfont}
+\newcommand{\xiaoliuhao}{\fontsize{6.5bp}{7.5bp}\selectfont}
+\newcommand{\qihao}{\fontsize{5.5bp}{6.5bp}\selectfont}
+% 添加数学符号
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\me}{\mathrm{e}}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\unwrap}{unwrap}
+% 参考文献引用指令
+\newcommand\citen[1]{[\!\!\citenum{#1}]}
+% 设置符号表Title
+\newcommand{\setnomname}[1]{\renewcommand\nomname{#1}}
+
 \ifseut@opt@master
   \newcommand{\seut@dagree@zh}{硕士}
   \newcommand{\seut@dagree@en}{Master}
@@ -70,119 +202,6 @@
   \fi
 \fi
 
-\LoadClass[twoside,a4paper,zihao=-4,UTF8,openright]{ctexrep}
-\newcommand{\chuhao}{\fontsize{42bp}{46bp}\selectfont}
-\newcommand{\xiaochuhao}{\fontsize{36bp}{40bp}\selectfont}
-\newcommand{\yichu}{\fontsize{32bp}{36bp}\selectfont}
-\newcommand{\yihao}{\fontsize{28bp}{32bp}\selectfont}
-\newcommand{\erhao}{\fontsize{21bp}{24bp}\selectfont}
-\newcommand{\xiaoerhao}{\fontsize{18bp}{20bp}\selectfont}
-\newcommand{\sanhao}{\fontsize{15.75bp}{18bp}\selectfont}
-\newcommand{\sihao}{\fontsize{14bp}{16bp}\selectfont}
-\newcommand{\xiaosihao}{\fontsize{12bp}{14bp}\selectfont}
-\newcommand{\wuhao}{\fontsize{10.5bp}{13bp}\selectfont}
-\newcommand{\xiaowuhao}{\fontsize{9bp}{11bp}\selectfont}
-\newcommand{\liuhao}{\fontsize{7.5bp}{9bp}\selectfont}
-\newcommand{\xiaoliuhao}{\fontsize{6.5bp}{7.5bp}\selectfont}
-\newcommand{\qihao}{\fontsize{5.5bp}{6.5bp}\selectfont}
-\setCJKmainfont{SimSun}
-\ctexset{%
-  chapter/format=\centering,
-  chapter/nameformat=\large\heiti,
-  chapter/numberformat=\large\heiti,
-  chapter/titleformat=\large\heiti,
-  chapter/beforeskip=0pt,
-  section/format=\raggedright,
-  section/nameformat={\large\bfseries},
-  section/numberformat={\large\bfseries},
-  section/titleformat={\sihao\bfseries},
-  subsection/format=\sihao\mdseries\raggedright,
-  subsubsection/format=\sihao\mdseries\raggedright,
-  listfigurename={插图目录},
-  listtablename={表格目录}
-}
-
-% controlling the typographic design of the Table of Contents, ...
-\RequirePackage[titles]{tocloft}
-\renewcommand{\cftchapleader}{\bfseries\cftdotfill{\cftdotsep}}
-% 处理浮动图形和表格的标题样式
-\RequirePackage[font=small]{caption}
-\setmainfont[Mapping=tex-text]{Times New Roman}
-% amsmath 宏包提供数学公式支持
-\RequirePackage{amsmath}
-% 提供数学符号和字体支持
-\RequirePackage{amssymb}
-% amsthm 宏包支持自定义数学定理环境
-\RequirePackage{amsthm}
-\numberwithin{equation}{chapter}
-\newcommand{\dif}{\mathrm{d}}
-\DeclareMathOperator*{\argmin}{argmin}
-\DeclareMathOperator*{\argmax}{argmax}
-\DeclareMathOperator{\diag}{diag}
-\DeclareMathOperator{\rank}{rank}
-\DeclareMathOperator{\sinc}{sinc}
-\DeclareMathOperator{\unwrap}{unwrap}
-\def\me{\mathrm{e}}
-% 提供数学符号和字体支持
-\RequirePackage{amsfonts}
-% 提供数学符号和字体支持
-\RequirePackage{bm}
-% 使用graphicx 宏包支持插入图片。
-\RequirePackage{graphicx}
-\graphicspath{{figures/}{./}}
-% Produces lists of symbols
-\RequirePackage{nomencl}
-\makenomenclature
-\newcommand{\setnomname}[1]{\renewcommand\nomname{#1}}
-\renewcommand{\nomname}{术语与数学符号约定}
-% float wrapper for algorithms
-\RequirePackage{algorithm}
-% first algorithm typesetting environment
-\RequirePackage{algorithmic}
-\numberwithin{algorithm}{chapter}
-\floatname{algorithm}{算法}
-\renewcommand{\listalgorithmname}{算法目录}
-% Flexible bibliography support
-\RequirePackage[super,square]{natbib}
-\newcommand\citen[1]{[\!\!\citenum{#1}]}
-% 可根据交叉引用生成超链接
-\RequirePackage{hyperref}
-\ifseut@opt@nocolorlinks
-  \hypersetup{colorlinks=false}
-\else
-  \hypersetup{colorlinks=true}
-\fi
-\hypersetup{
-  linkcolor=blue,
-  anchorcolor=black,
-  citecolor=red,
-  filecolor=magenta,
-  menucolor=red,
-  urlcolor=magenta
-}
-
-% 使用geometry 宏包定义页面布局，定义段间距。
-\RequirePackage[top=1.2in,bottom=1in,left=2.5cm,right=2.5cm,a4paper]{geometry}
-% 支持自定义页眉页脚
-\RequirePackage{fancyhdr}
-\fancypagestyle{seustyle}{%
-  \fancyhf{}
-  \fancyhead[CO]{\xiaowuhao\universityname{}\@thesistype}
-  \fancyhead[CE]{ \xiaowuhao\leftmark}
-  \fancyfoot[CO,CE]{\thepage}
-}
-\pagestyle{seustyle}
-
-\fancypagestyle{nom}{%
-  \fancyhf{}
-  \fancyhead[CO]{\xiaowuhao\universityname{}\@thesistype}
-  \fancyhead[CE]{ \xiaowuhao\nomname}
-  \fancyfoot[CO,CE]{\thepage}
-}
-
-\renewcommand{\headrulewidth}{0.4pt}
-% Add picture commands (or backgrounds) to every page
-\RequirePackage{eso-pic}
 \renewcommand{\author}[2]{
   \def\@author{#1}
   \newcommand{\@authoreng}{#2}
@@ -284,6 +303,8 @@
     \rule[-2.5pt]{6cm}{.4pt}\\ \small\@seuthesisthanks}
   \renewcommand\headrulewidth{0pt}
 }
+
+%% 插入页面
 
 \newcommand{\makechinesecover}{
   \hypersetup{
