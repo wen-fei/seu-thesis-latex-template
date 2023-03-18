@@ -59,7 +59,8 @@
 \RequirePackage{ifxetex}
 \RequireXeTeX
 % 使用geometry 宏包定义页面布局，定义段间距。
-\RequirePackage[top=1.2in,bottom=1in,left=2.5cm,right=2.5cm,a4paper]{geometry}
+\RequirePackage{geometry}
+\geometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm}
 % 使用graphicx 宏包支持插入图片。
 \RequirePackage{graphicx}
 \graphicspath{{figures/}{./}}
