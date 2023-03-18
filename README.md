@@ -22,8 +22,19 @@
 样例文件说明如下：
 
 * format: 东南大学研究生学位论文的格式规定 
-* sample.tex: 模板，首行选项（engineering, masters, phd）
+* sample.tex: 模板`seuthesix`
 * sample.bib: 参考文献引用存放文件
+
+模板`seuthesix`选项说明如下: 
+
+* 学位（必选，单选）: phd / masters
+* 工程学位（可选，默认非）: engineering
+* 超链接无颜色（可选，默认非）: nocolorlinks
+* 其它章节（可选，多选，默认不选）: 
+  * algorithmlist: 算法目录
+  * figurelist: 插图目录
+  * tablelist: 表格目录
+  * nomlist: 术语与数学符号约定
 
 ### 常见问题以及解决办法
 

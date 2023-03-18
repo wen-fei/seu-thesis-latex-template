@@ -22,40 +22,46 @@
 \ProvidesClass{seuthesix}[2016/03/20 1.0.1 The LaTeX template for academic  degree thesis of Southeast University]
 \typeout{Document Class `seuthesix' 1.0.1 by James Fan (2016/03/20)}
 
-\newif\ifnocolorlinks\nocolorlinksfalse
-\newif\ifcoadvisor\coadvisorfalse
-\newif\ifengineering\engineeringfalse
-\newif\ifmasters\masterstrue
-\newif\ifphd\phdfalse
-\newif\ifalgorithmlist\algorithmlistfalse
-\newif\iffigurelist\figurelistfalse
-\newif\iftablelist\tablelistfalse
-\newif\ifnomlist\nomlistfalse
-\DeclareOption{nocolorlinks}{\nocolorlinkstrue}
-\DeclareOption{phd}{\phdtrue\mastersfalse\engineeringfalse}
-\DeclareOption{masters}{\masterstrue\engineeringfalse\phdfalse}
-\DeclareOption{engineering}{%
-  \engineeringtrue\masterstrue\phdfalse}
-\DeclareOption{algorithmlist}{\algorithmlisttrue}
-\DeclareOption{figurelist}{\figurelisttrue}
-\DeclareOption{tablelist}{\tablelisttrue}
-\DeclareOption{nomlist}{\nomlisttrue}
+\newif\ifseut@opt@nocolorlinks\seut@opt@nocolorlinksfalse
+\newif\ifseut@opt@engineering\seut@opt@engineeringfalse
+\newif\ifseut@opt@master\seut@opt@mastertrue
+\newif\ifseut@opt@phd\seut@opt@phdfalse
+\newif\ifseut@opt@algorithmlist\seut@opt@algorithmlistfalse
+\newif\ifseut@opt@figurelist\seut@opt@figurelistfalse
+\newif\ifseut@opt@tablelist\seut@opt@tablelistfalse
+\newif\ifseut@opt@nomlist\seut@opt@nomlistfalse
+\newif\ifseut@opt@coadvisor\seut@opt@coadvisorfalse
+\newif\ifseut@opt@thanks\seut@opt@thanksfalse
+\DeclareOption{nocolorlinks}{\seut@opt@nocolorlinkstrue}
+\DeclareOption{phd}{
+  \seut@opt@phdtrue
+  \seut@opt@masterfalse
+}
+\DeclareOption{masters}{
+  \seut@opt@mastertrue
+  \seut@opt@phdfalse
+}
+\DeclareOption{engineering}{\seut@opt@engineeringtrue}
+\DeclareOption{algorithmlist}{\seut@opt@algorithmlisttrue}
+\DeclareOption{figurelist}{\seut@opt@figurelisttrue}
+\DeclareOption{tablelist}{\seut@opt@tablelisttrue}
+\DeclareOption{nomlist}{\seut@opt@nomlisttrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexrep}}
 \ProcessOptions
 
 \InputIfFileExists{seuthesix.cfg}
 {\typeout{[seuthesix]: Load seuthesix.cfg successfully!}}%
 {\typeout{[seuthesix]: Load seuthesix.cfg failed!}}%
-\ifmasters
+\ifseut@opt@master
   \newcommand{\seut@dagree@zh}{硕士}
   \newcommand{\seut@dagree@en}{Master}
-  \ifengineering
+  \ifseut@opt@engineering
     \renewcommand\@degreelevel{工程硕士}
   \else
     \renewcommand\@degreelevel{硕士}
   \fi
 \else
-  \ifphd
+  \ifseut@opt@phd
     \newcommand{\seut@dagree@zh}{博士}
     \newcommand{\seut@dagree@en}{Doctor}
     \renewcommand\@degreelevel{博士}
@@ -141,7 +147,7 @@
 \newcommand\citen[1]{[\!\!\citenum{#1}]}
 % 可根据交叉引用生成超链接
 \RequirePackage{hyperref}
-\ifnocolorlinks
+\ifseut@opt@nocolorlinks
   \hypersetup{colorlinks=false}
 \else
   \hypersetup{colorlinks=true}
@@ -204,7 +210,7 @@
 \newcommand{\@coadvisornameeng}{}
 \newcommand{\@coadvisortitleeng}{}
 \newcommand{\coadvisor}[4]{
-  \coadvisortrue
+  \seut@opt@coadvisortrue
   \renewcommand{\@coadvisorname}{#1}
   \renewcommand{\@coadvisortitle}{#2}
   \renewcommand{\@coadvisornameeng}{#3}
@@ -262,10 +268,16 @@
     \underline{\makebox[#1][c]{\heiti\xiaosihao#3}}
   }
 }
-\newif\ifthanks\thanksfalse
 \newcommand\@seuthesisthanks{ }
-\newcommand\seuthesisthanks[1]{\renewcommand\@seuthesisthanks{#1}\thankstrue}
-\newcommand\@thesisthanks{\ifthanks\thispagestyle{thanksstyle}\fi}
+\newcommand\seuthesisthanks[1]{
+  \renewcommand\@seuthesisthanks{#1}
+  \seut@opt@thankstrue
+}
+\newcommand\@thesisthanks{
+  \ifseut@opt@thanks
+    \thispagestyle{thanksstyle}
+  \fi
+}
 \fancypagestyle{thanksstyle}{%
   \fancyhf{}
   \fancyfoot[L]{\setlength{\baselineskip}{0pt}%
@@ -287,7 +299,7 @@
 
     \includegraphics[height=0.63in]{figures/seu-text-logo}
 
-    \ifmasters
+    \ifseut@opt@master
       \includegraphics{figures/master-hwzs}
     \else
       \includegraphics{figures/doctor-hwzs}
@@ -314,7 +326,7 @@
             \xiaoerhao\songti\textbf{\@advisorname\quad\@advisortitle} }}
         \\
                                                                &
-        \ifcoadvisor
+        \ifseut@opt@coadvisor
           \underline{\makebox[6cm][s]{
               \xiaoerhao\songti\textbf{\@coadvisorname\quad\@coadvisortitle} }}
         \else
@@ -337,7 +349,7 @@
     \vspace{2cm}%
     {\fontsize{16pt}{24pt}\selectfont
     {A
-      \ifmasters
+      \ifseut@opt@master
         Thesis
       \else
         Dissertation
@@ -351,7 +363,7 @@
     {\vspace{0.5in}}%
     {Supervised by:}\\
     {\@advisortitleeng\  \@advisornameeng}\\
-    \ifcoadvisor
+    \ifseut@opt@coadvisor
     {and}\\
     {\@coadvisortitleeng\  \@coadvisornameeng}\\
     \else
@@ -450,28 +462,28 @@
 }
 
 \newcommand\listofothers{%
-  \iffigurelist
+  \ifseut@opt@figurelist
     \cleardoublepage
     \phantomsection
     \addcontentsline{toc}{chapter}{\listfigurename}
     \listoffigures
   \fi
 
-  \iftablelist
+  \ifseut@opt@tablelist
     \cleardoublepage
     \phantomsection
     \addcontentsline{toc}{chapter}{\listtablename}
     \listoftables
   \fi
 
-  \ifalgorithmlist
+  \ifseut@opt@algorithmlist
     \cleardoublepage
     \phantomsection
     \addcontentsline{toc}{chapter}{\listalgorithmname}
     \listofalgorithms
   \fi
 
-  \ifnomlist
+  \ifseut@opt@nomlist
     \cleardoublepage
     \phantomsection
     \addcontentsline{toc}{chapter}{\nomname}
