@@ -55,6 +55,9 @@
 
 %% 加载宏包
 
+% 必须使用XeTeX编译
+\RequirePackage{ifxetex}
+\RequireXeTeX
 % 使用geometry 宏包定义页面布局，定义段间距。
 \RequirePackage[top=1.2in,bottom=1in,left=2.5cm,right=2.5cm,a4paper]{geometry}
 % 使用graphicx 宏包支持插入图片。
