@@ -131,7 +131,8 @@
   citecolor=red,
   filecolor=magenta,
   menucolor=red,
-  urlcolor=magenta
+  urlcolor=magenta,
+  pdfborder=0 0 0
 }
 % 设置页眉页脚格式
 \fancypagestyle{seustyle}{%
