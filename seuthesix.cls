@@ -66,9 +66,10 @@
 % 使用graphicx 宏包支持插入图片。
 \RequirePackage{graphicx}
 \graphicspath{{figures/}{./}}
-% controlling the typographic design of the Table of Contents, ...
+% 使用setspace 设置局部行距
+\RequirePackage{setspace}
+% 使用tocloft 设置目录字体
 \RequirePackage[titles]{tocloft}
-\renewcommand{\cftchapleader}{\bfseries\cftdotfill{\cftdotsep}}
 % 处理浮动图形和表格的标题样式
 \RequirePackage{caption}
 % amsmath 宏包提供数学公式支持
@@ -188,6 +189,10 @@
   \fancyhead[CO]{\zihao{-5}\nomname}
   \fancyfoot[CO,CE]{\thepage}
 }
+% 设置目录
+\setlength{\cftbeforechapskip}{0pt}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchapfont}{\songti}
 
 %% 导入配置
 

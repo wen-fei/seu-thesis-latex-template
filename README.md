@@ -77,6 +77,8 @@
 宏包说明：
 
 * [ctex](https://ctan.org/tex-archive/language/chinese/ctex): 中文环境
+* [setspace](https://ctan.org/pkg/setspace) 设置局部行距
+* [tocloft](https://ctan.org/pkg/tocloft) 设置目录
 
 ## 常见问题以及解决办法
 
