@@ -22,6 +22,8 @@
 \ProvidesClass{seuthesix}[2016/03/20 1.0.1 The LaTeX template for academic  degree thesis of Southeast University]
 \typeout{Document Class `seuthesix' 1.0.1 by James Fan (2016/03/20)}
 
+\newif\ifseut@opt@fontwin\seut@opt@fontwinfalse
+\newif\ifseut@opt@fontmac\seut@opt@fontmacfalse
 \newif\ifseut@opt@nocolorlinks\seut@opt@nocolorlinksfalse
 \newif\ifseut@opt@engineering\seut@opt@engineeringfalse
 \newif\ifseut@opt@master\seut@opt@mastertrue
@@ -32,6 +34,8 @@
 \newif\ifseut@opt@nomlist\seut@opt@nomlistfalse
 \newif\ifseut@opt@coadvisor\seut@opt@coadvisorfalse
 \newif\ifseut@opt@thanks\seut@opt@thanksfalse
+\DeclareOption{fontwin}{\seut@opt@fontwintrue}
+\DeclareOption{fontmac}{\seut@opt@fontmactrue}
 \DeclareOption{nocolorlinks}{\seut@opt@nocolorlinkstrue}
 \DeclareOption{phd}{
   \seut@opt@phdtrue
@@ -46,12 +50,11 @@
 \DeclareOption{figurelist}{\seut@opt@figurelisttrue}
 \DeclareOption{tablelist}{\seut@opt@tablelisttrue}
 \DeclareOption{nomlist}{\seut@opt@nomlisttrue}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions
 
 %% 加载基类
-
-\LoadClass[twoside,a4paper,zihao=-4,UTF8,openright]{ctexbook}
+\LoadClass[a4paper]{book}
 
 %% 加载宏包
 
@@ -60,7 +63,6 @@
 \RequireXeTeX
 % 使用geometry 宏包定义页面布局，定义段间距。
 \RequirePackage{geometry}
-\geometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm}
 % 使用graphicx 宏包支持插入图片。
 \RequirePackage{graphicx}
 \graphicspath{{figures/}{./}}
@@ -68,7 +70,7 @@
 \RequirePackage[titles]{tocloft}
 \renewcommand{\cftchapleader}{\bfseries\cftdotfill{\cftdotsep}}
 % 处理浮动图形和表格的标题样式
-\RequirePackage[font=small]{caption}
+\RequirePackage{caption}
 % amsmath 宏包提供数学公式支持
 \RequirePackage{amsmath}
 % amsthm 宏包支持自定义数学定理环境
@@ -99,27 +101,49 @@
 \RequirePackage{fancyhdr}
 % Add picture commands (or backgrounds) to every page
 \RequirePackage{eso-pic}
+% 使用ctex 宏包支持中文 以下选项必须在引入时设置
+% 正文：小四号宋体，首行缩进。 
+% 使用中文章节标题
+% 1.25倍行距 需要修正latex与word中baselineskip的不同系数(1.2 vs 1.3)
+\RequirePackage[zihao=-4,heading=true,linespread=1.35417]{ctex}
 
 %% 基本配置
 
-% 字体设置
-\setCJKmainfont{SimSun}
+% A4纸张，双面印刷，四周页边距2cm，左、右两侧的页边距也可以选2.5cm
+\geometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm}
+% 修改默认的字体配置
+\ifseut@opt@fontmac
+  % ctex在macnew下的mainfont斜体为楷体
+  \setCJKmainfont{Songti SC Light}[BoldFont=Songti SC Bold,AutoFakeSlant]
+  % ctex在macnew下的黑体默认为华文细黑
+  \setCJKfamilyfont{zhhei}{Heiti SC Medium}[AutoFakeBold,AutoFakeSlant]
+\else
+  % ctex在win下的mainfont加粗为黑体且斜体为楷体
+  \setCJKmainfont{SimSun}[AutoFakeBold,AutoFakeSlant]
+\fi
 \setmainfont[Mapping=tex-text]{Times New Roman}
+% 中文格式
 \ctexset{%
-  chapter/format=\centering,
-  chapter/nameformat=\large\heiti,
-  chapter/numberformat=\large\heiti,
-  chapter/titleformat=\large\heiti,
-  chapter/beforeskip=0pt,
-  section/format=\raggedright,
-  section/nameformat={\large\bfseries},
-  section/numberformat={\large\bfseries},
-  section/titleformat={\sihao\bfseries},
-  subsection/format=\sihao\mdseries\raggedright,
-  subsubsection/format=\sihao\mdseries\raggedright,
+  % plain方案标点
+  punct=plain,
+  % 目录名称
   listfigurename={插图目录},
-  listtablename={表格目录}
+  listtablename={表格目录},
+  % 一级标题（题目）：二号宋体居中
+  % 二级标题（章）：三号黑体居中
+  chapter/format=\centering\zihao{3}\heiti,
+  chapter/beforeskip=0pt,
+  % 三级标题（节）：四号宋体（加粗）居左
+  section/format=\raggedright\zihao{4}\songti\bfseries,
+  % 四级标题（节内小节）小四号黑体居左
+  subsection/format=\raggedright\zihao{-4}\heiti%
 }
+% 表格文字可用小五宋体或正文字体，居中（或居左）并整齐划一，表格名及图名用五号宋体
+\captionsetup{font=small}
+% 每一表应有简短确切的题名，连同表号置于表上。
+\captionsetup[table]{position=above}
+% 每一图应有简短确切的题名，连同图号置于图下。
+\captionsetup[figure]{position=below}
 % 设置超链接格式
 \ifseut@opt@nocolorlinks
   \hypersetup{colorlinks=false}
@@ -136,16 +160,23 @@
   pdfborder=0 0 0
 }
 % 设置页眉页脚格式
+% 页码1从正文开始，前面摘要和目录等内容的页码用大写罗马数字表示。
+% 页眉
+% 偶数页：东南大学硕士学位论文（小五号宋体居中）
+% 奇数页：第 * 章章题目（小五号宋体居中）
+% 页脚
+% 正文及其以后部分，其页脚为居中、连续的阿拉伯数字页码。
+% 摘要和目录等内容的页脚为居中、连续的大写罗马数字页码。
 \fancypagestyle{seustyle}{%
   \fancyhf{}
-  \fancyhead[CE]{\xiaowuhao\universityname{}\@thesistype}
-  \fancyhead[CO]{ \xiaowuhao\leftmark}
+  \fancyhead[CE]{\zihao{-5}\universityname{}\@thesistype}
+  \fancyhead[CO]{\zihao{-5}\leftmark}
   \fancyfoot[CO,CE]{\thepage}
 }
 \fancypagestyle{nom}{%
   \fancyhf{}
-  \fancyhead[CE]{\xiaowuhao\universityname{}\@thesistype}
-  \fancyhead[CO]{ \xiaowuhao\nomname}
+  \fancyhead[CE]{\zihao{-5}\universityname{}\@thesistype}
+  \fancyhead[CO]{\zihao{-5}\nomname}
   \fancyfoot[CO,CE]{\thepage}
 }
 
@@ -157,21 +188,6 @@
 
 %% 定义常量和变量
 
-% 字号指令
-\newcommand{\chuhao}{\fontsize{42bp}{46bp}\selectfont}
-\newcommand{\xiaochuhao}{\fontsize{36bp}{40bp}\selectfont}
-\newcommand{\yichu}{\fontsize{32bp}{36bp}\selectfont}
-\newcommand{\yihao}{\fontsize{28bp}{32bp}\selectfont}
-\newcommand{\erhao}{\fontsize{21bp}{24bp}\selectfont}
-\newcommand{\xiaoerhao}{\fontsize{18bp}{20bp}\selectfont}
-\newcommand{\sanhao}{\fontsize{15.75bp}{18bp}\selectfont}
-\newcommand{\sihao}{\fontsize{14bp}{16bp}\selectfont}
-\newcommand{\xiaosihao}{\fontsize{12bp}{14bp}\selectfont}
-\newcommand{\wuhao}{\fontsize{10.5bp}{13bp}\selectfont}
-\newcommand{\xiaowuhao}{\fontsize{9bp}{11bp}\selectfont}
-\newcommand{\liuhao}{\fontsize{7.5bp}{9bp}\selectfont}
-\newcommand{\xiaoliuhao}{\fontsize{6.5bp}{7.5bp}\selectfont}
-\newcommand{\qihao}{\fontsize{5.5bp}{6.5bp}\selectfont}
 % 添加数学符号
 \newcommand{\dif}{\mathrm{d}}
 \newcommand{\me}{\mathrm{e}}
@@ -280,13 +296,13 @@
   \renewcommand{\@reviewerB}{#2}
 }
 \newcommand{\CoverTopOption}[3][s]{
-\makebox[1.5cm][#1]{\xiaowuhao #2}:{
-\underline{\makebox[1.5cm][c]{\xiaowuhao #3}}}
+\makebox[1.5cm][#1]{\zihao{-5} #2}:{
+\underline{\makebox[1.5cm][c]{\zihao{-5} #3}}}
 }
 \newcommand{\CoverBottomOption}[3][4.5cm]{
   \makebox[7cm][s]{
-    {\songti\xiaosihao#2}
-    \underline{\makebox[#1][c]{\heiti\xiaosihao#3}}
+    {\songti\zihao{-4}#2}
+    \underline{\makebox[#1][c]{\heiti\zihao{-4}#3}}
   }
 }
 \newcommand\@seuthesisthanks{ }
@@ -302,7 +318,7 @@
 \fancypagestyle{thanksstyle}{%
   \fancyhf{}
   \fancyfoot[L]{\setlength{\baselineskip}{0pt}%
-    \rule[-2.5pt]{6cm}{.4pt}\\ \small\@seuthesisthanks}
+    \rule[-2.5pt]{6cm}{.4pt}\\ \zihao{5}\@seuthesisthanks}
   \renewcommand\headrulewidth{0pt}
 }
 
@@ -318,7 +334,6 @@
 
   \thispagestyle{empty}
   \begin{center}
-    \xiaochuhao
 
     \includegraphics[height=0.63in]{figures/seu-text-logo}
 
@@ -329,29 +344,29 @@
     \fi
 
     \vspace{31.5pt}
-    \yihao\heiti\@title\@thesisthanks\\
-    \yihao\heiti\@subtitle
+    \zihao{2}\heiti\@title\@thesisthanks\\
+    \zihao{2}\heiti\@subtitle\\
     \vspace{42pt}
 
     {
       \setlength{\tabcolsep}{0pt}
       \begin{tabular}{cc}
-        \makebox[3.5cm][s]{\xiaoerhao\heiti{}专~~业~~名~~称: } &
+        \makebox[3.5cm][s]{\zihao{3}\heiti{}专~~业~~名~~称: } &
         \underline{\makebox[6cm][s]{
-        \xiaoerhao\songti\textbf{\@major} }}                     \\
+        \zihao{3}\songti\textbf{\@major} }}                     \\
         \\
-        \makebox[3.5cm][s]{ \xiaoerhao\heiti\authorpre:  }     &
+        \makebox[3.5cm][s]{ \zihao{3}\heiti\authorpre:  }     &
         \underline{\makebox[6cm][s]{
-        \xiaoerhao\songti\textbf{\@author} }}                    \\
+        \zihao{3}\songti\textbf{\@author} }}                    \\
         \\
-        \makebox[3.5cm][s]{ \xiaoerhao\heiti\advisorpre:  }    &
+        \makebox[3.5cm][s]{ \zihao{3}\heiti\advisorpre:  }    &
         \underline{\makebox[6cm][s]{
-            \xiaoerhao\songti\textbf{\@advisorname\quad\@advisortitle} }}
+            \zihao{3}\songti\textbf{\@advisorname\quad\@advisortitle} }}
         \\
                                                                &
         \ifseut@opt@coadvisor
           \underline{\makebox[6cm][s]{
-              \xiaoerhao\songti\textbf{\@coadvisorname\quad\@coadvisortitle} }}
+              \zihao{3}\songti\textbf{\@coadvisorname\quad\@coadvisortitle} }}
         \else
         \fi
       \end{tabular}
@@ -403,9 +418,9 @@
 
 \newcommand{\seudeclare}{
   \clearpage\thispagestyle{empty}\cleardoublepage\thispagestyle{empty}
-  {\xiaosihao
+  {\zihao{-4}
     \begin{center}
-      {\heiti\sanhao 东南大学学位论文独创性声明}
+      {\heiti\zihao{3} 东南大学学位论文独创性声明}
     \end{center}
     \vspace{0.5in}
     { \linespread{1.5}
@@ -420,7 +435,7 @@
     \end{flushright}
     \vspace{1.5in}
     \begin{center}
-      {\heiti\sanhao 东南大学学位论文使用授权声明}
+      {\heiti\zihao{3} 东南大学学位论文使用授权声明}
     \end{center}
     \vspace{0.5in}
     { \linespread{1.5}
@@ -468,15 +483,7 @@
   \cleardoublepage\thispagestyle{plain}
   \newcommand{\@keywords}{#1}
   \phantomsection
-  \ctexset{%
-    chapter/nameformat=\large\bfseries,
-    chapter/titleformat=\large\bfseries
-  }
   \chapter{Abstract}
-  \ctexset{%
-    chapter/nameformat=\large\heiti,
-    chapter/titleformat=\large\heiti
-  }
 }
 {
   \par

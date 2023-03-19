@@ -29,6 +29,7 @@
 
 * 学位（必选，单选）: phd / masters
 * 工程学位（可选，默认非）: engineering
+* 系统字体（可选，默认fontwin）: fontwin / fontmac
 * 超链接无颜色（可选，默认非）: nocolorlinks
 * 其它章节（可选，多选，默认不选）: 
   * algorithmlist: 算法目录
@@ -72,6 +73,10 @@
 % 作者简介
 \resume
 ```
+
+宏包说明：
+
+* [ctex](https://ctan.org/tex-archive/language/chinese/ctex): 中文环境
 
 ## 常见问题以及解决办法
 
