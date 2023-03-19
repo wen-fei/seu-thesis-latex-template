@@ -120,6 +120,8 @@
 \else
   % ctex在win下的mainfont加粗为黑体且斜体为楷体
   \setCJKmainfont{SimSun}[AutoFakeBold,AutoFakeSlant]
+  \setCJKfamilyfont{zhsong}{SimSun}[AutoFakeBold,AutoFakeSlant]
+  \setCJKfamilyfont{zhhei}{SimHei}[AutoFakeBold,AutoFakeSlant]
 \fi
 \setmainfont[Mapping=tex-text]{Times New Roman}
 % 中文格式
