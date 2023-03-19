@@ -105,6 +105,8 @@
 % 正文：小四号宋体，首行缩进。 
 % 使用中文章节标题
 % 1.25倍行距 需要修正latex与word中baselineskip的不同系数(1.2 vs 1.3)
+% word只空余在文字下方 latex空余在文字上下两侧
+% 目前没有对于行距的要求 选择合适的即可
 \RequirePackage[zihao=-4,heading=true,linespread=1.35417]{ctex}
 
 %% 基本配置
@@ -134,11 +136,16 @@
   % 一级标题（题目）：二号宋体居中
   % 二级标题（章）：三号黑体居中
   chapter/format=\centering\zihao{3}\heiti,
-  chapter/beforeskip=0pt,
+  chapter/beforeskip=8bp,
+  chapter/afterskip=16bp,
   % 三级标题（节）：四号宋体（加粗）居左
   section/format=\raggedright\zihao{4}\songti\bfseries,
+  section/beforeskip=7bp,
+  section/afterskip=7bp,
   % 四级标题（节内小节）小四号黑体居左
-  subsection/format=\raggedright\zihao{-4}\heiti%
+  subsection/format=\raggedright\zihao{-4}\heiti,
+  subsection/beforeskip=6bp,
+  subsection/afterskip=6bp%
 }
 % 表格文字可用小五宋体或正文字体，居中（或居左）并整齐划一，表格名及图名用五号宋体
 \captionsetup{font=small}
