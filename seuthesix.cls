@@ -119,11 +119,14 @@
   % ctex在macnew下的mainfont斜体为楷体
   \setCJKmainfont{Songti SC Light}[BoldFont=Songti SC Bold,AutoFakeSlant]
   % ctex在macnew下的黑体默认为华文细黑
+  % 设置粗体的粗细程度 该宏命令仅对随后定义的 CJK 字体有效
+  \xeCJKsetemboldenfactor{1}
   \setCJKfamilyfont{zhhei}{Heiti SC Medium}[AutoFakeBold,AutoFakeSlant]
 \else
   % ctex在win下的mainfont加粗为黑体且斜体为楷体
   \setCJKmainfont{SimSun}[AutoFakeBold,AutoFakeSlant]
   \setCJKfamilyfont{zhsong}{SimSun}[AutoFakeBold,AutoFakeSlant]
+  \xeCJKsetemboldenfactor{1}
   \setCJKfamilyfont{zhhei}{SimHei}[AutoFakeBold,AutoFakeSlant]
 \fi
 \setmainfont[Mapping=tex-text]{Times New Roman}
@@ -324,114 +327,137 @@
   \renewcommand\@seuthesisthanks{#1}
   \seut@opt@thankstrue
 }
-\newcommand\@thesisthanks{
-  \ifseut@opt@thanks
-    \thispagestyle{thanksstyle}
-  \fi
-}
-\fancypagestyle{thanksstyle}{%
-  \fancyhf{}
-  \fancyfoot[L]{\setlength{\baselineskip}{0pt}%
-    \rule[-2.5pt]{6cm}{.4pt}\\ \zihao{5}\@seuthesisthanks}
-  \renewcommand\headrulewidth{0pt}
-}
 
 %% 插入页面
 
-\newcommand{\makechinesecover}{
-  \hypersetup{
+% 文档信息
+\newcommand*{\seut@setpdfinfo}{\hypersetup{%
     pdfauthor={\@author},
     pdftitle={\universityname{}\@thesistype},
     pdfsubject={\@title \@subtitle},
-    pdfcreator={xetex}
-  }
+    pdfcreator={\@author},
+    pdfproducer={XeLaTeX}}
+}
 
+% 中文页面
+\newenvironment{seutthanks}{\fontfamily{Times New Roman}\fontsize{16bp}{20bp}\selectfont}{\par}
+\newcommand{\makechinesecover}{
   \thispagestyle{empty}
+  \quad\par
+  \vspace{23.25bp}
   \begin{center}
-
-    \includegraphics[height=0.63in]{figures/seu-text-logo}
-
+    \includegraphics[height=0.63in,width=1.92in]{figures/seu-text-logo.jpg}
+    \par
+    \vspace{15.75bp}
     \ifseut@opt@master
       \includegraphics{figures/master-hwzs}
     \else
       \includegraphics{figures/doctor-hwzs}
     \fi
-
-    \vspace{31.5pt}
-    \zihao{2}\heiti\@title\@thesisthanks\\
-    \zihao{2}\heiti\@subtitle\\
-    \vspace{42pt}
-
+    \par
+    \vspace{51.75bp}
+    {
+      \setstretch{1.19312}
+      \zihao{2}\heiti\bfseries{\@title}\newline
+      \zihao{2}\heiti\bfseries{\@subtitle}\par
+    }
+    \vspace{36bp}
     {
       \setlength{\tabcolsep}{0pt}
-      \begin{tabular}{cc}
-        \makebox[3.5cm][s]{\zihao{3}\heiti{}专~~业~~名~~称: } &
-        \underline{\makebox[6cm][s]{
-        \zihao{3}\songti\textbf{\@major} }}                     \\
+      \renewcommand{\arraystretch}{1.5962}
+      \begin{tabular}{rl}
+        \zihao{3}\heiti\textbf{专~~业~~名~~称：}  &
+        \zihao{3}\songti\underline{\textbf{\@major}}                         \\
         \\
-        \makebox[3.5cm][s]{ \zihao{3}\heiti\authorpre:  }     &
-        \underline{\makebox[6cm][s]{
-        \zihao{3}\songti\textbf{\@author} }}                    \\
+        \zihao{3}\heiti\textbf{\authorpre：}  &
+        \zihao{3}\songti\underline{\textbf{\@author}}                        \\
         \\
-        \makebox[3.5cm][s]{ \zihao{3}\heiti\advisorpre:  }    &
-        \underline{\makebox[6cm][s]{
-            \zihao{3}\songti\textbf{\@advisorname\quad\@advisortitle} }}
-        \\
-                                                               &
+        \zihao{3}\heiti\textbf{\advisorpre：} &
+        \zihao{3}\songti\underline{\textbf{\@advisorname\,\,\@advisortitle}} \\
+                                             &
         \ifseut@opt@coadvisor
-          \underline{\makebox[6cm][s]{
-              \zihao{3}\songti\textbf{\@coadvisorname\quad\@coadvisortitle} }}
-        \else
+          \zihao{3}\songti\underline{\textbf{\@coadvisorname\,\,\@coadvisortitle}}
         \fi
       \end{tabular}
     }
   \end{center}
+  \ifseut@opt@thanks
+    \vspace{74.25bp}
+    \begin{seutthanks}
+      \noindent\underline{\qquad\qquad\qquad\qquad\,\,\,}
+    \end{seutthanks}
+    \vspace{6bp}
+    {
+      \setstretch{1.25}
+      \noindent\zihao{5}\songti\@seuthesisthanks\par
+    }
+  \fi
 }
 
+% 英文页面
 \newcommand{\makeenglishcover}{%
-  \clearpage\thispagestyle{empty}\cleardoublepage\thispagestyle{empty}
+  \thispagestyle{empty}
   \begin{center}
+    \setstretch{1}
     ~\\
-    {\fontsize{24pt}{28pt}\selectfont
-    \MakeUppercase{\@titleeng}\\
-    \MakeUppercase{\@subtitleeng}
-    \par
+    \vspace{30.375bp}%
+    {
+      \fontsize{24bp}{31.25bp}\selectfont
+      \MakeUppercase{\@titleeng}\\
+      \MakeUppercase{\@subtitleeng}
+      \par
     }
-
-    \vspace{2cm}%
-    {\fontsize{16pt}{24pt}\selectfont
-    {A
-      \ifseut@opt@master
-        Thesis
-      \else
-        Dissertation
-      \fi
-      submitted to}\\
+    \vspace{-3bp}%
+    {
+    \fontsize{15bp}{31.1875bp}\selectfont
+    \quad\\
+    {
+    A
+    \ifseut@opt@master
+      Thesis
+    \else
+      Dissertation
+    \fi
+    submitted to}\\
     {\universitynameeng}\\
-    {For the Academic Degree of \seut@dagree@en\ of \@degreetypeen}\\
-    {\vspace{0.5in}}%
+    {For the
+    \ifseut@opt@engineering
+      Professional
+    \else
+      Academic
+    \fi
+    Degree of \seut@dagree@en\ of}\\
+    {\@degreetypeen}\\
+    \quad\\
+    \quad\\
+    \par
+    }%
+    {
+    \fontsize{16bp}{31.3bp}\selectfont
     {BY}\\
     {\@authoreng}\\
-    {\vspace{0.5in}}%
+    \quad\\
     {Supervised by:}\\
     {\@advisortitleeng\  \@advisornameeng}\\
     \ifseut@opt@coadvisor
     {and}\\
     {\@coadvisortitleeng\  \@coadvisornameeng}\\
     \else
+    \quad\\
+    \quad\\
     \fi
-    {\vfill}
+    \quad\\
     {\@departmenteng}\\
     {\universitynameeng}\\
     {\todayeng}
     \par
     }%
   \end{center}%
-
 }
 
+% 独创性声明
 \newcommand{\seudeclare}{
-  \clearpage\thispagestyle{empty}\cleardoublepage\thispagestyle{empty}
+  \thispagestyle{empty}
   {\zihao{-4}
     \begin{center}
       {\heiti\zihao{3} 东南大学学位论文独创性声明}
@@ -467,11 +493,18 @@
 }
 
 \newcommand\makecover{%
+  % 设置文档信息
+  \seut@setpdfinfo
+  % 中文页面
   \makechinesecover
-  \makeenglishcover
-  \seudeclare
-  % 设置后续格式
   \clearpage\thispagestyle{empty}\cleardoublepage
+  % 英文页面
+  \makeenglishcover
+  \clearpage\thispagestyle{empty}\cleardoublepage
+  % 独创性声明
+  \seudeclare
+  \clearpage\thispagestyle{empty}\cleardoublepage
+  % 设置后续格式
   \pagestyle{seustyle}
   \renewcommand{\headrulewidth}{0.4pt}
 }
@@ -507,14 +540,14 @@
 }
 
 \renewcommand*{\tableofcontents}{%
-    \if@twocolumn
-      \@restonecoltrue\onecolumn
-    \else
-      \@restonecolfalse
-    \fi
-    \chapter{\contentsname}%
-    \@starttoc{toc}%
-    \if@restonecol\twocolumn\fi
+  \if@twocolumn
+    \@restonecoltrue\onecolumn
+  \else
+    \@restonecolfalse
+  \fi
+  \chapter{\contentsname}%
+  \@starttoc{toc}%
+  \if@restonecol\twocolumn\fi
 }
 
 \newcommand\listofothers{%
