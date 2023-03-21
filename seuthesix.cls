@@ -458,38 +458,59 @@
 % 独创性声明
 \newcommand{\seudeclare}{
   \thispagestyle{empty}
-  {\zihao{-4}
-    \begin{center}
-      {\heiti\zihao{3} 东南大学学位论文独创性声明}
-    \end{center}
-    \vspace{0.5in}
-    { \linespread{1.5}
-      本人声明所呈交的学位论文是我个人在导师指导下进行的研究工作及取得的
-      研究成果。尽我所知，除了文中特别加以标注和致谢的地方外，论文中不包
-      含其他人已经发表或撰写过的研究成果，也不包含为获得东南大学或其它教
-      育机构的学位或证书而使用过的材料。与我一同工作的同志对本研究所做的
-      任何贡献均已在论文中作了明确的说明并表示了谢意。\par}
-    \vspace{0.3in}
-    \begin{flushright}
-      研究生签名：\signline 日~期：\signline
-    \end{flushright}
-    \vspace{1.5in}
-    \begin{center}
-      {\heiti\zihao{3} 东南大学学位论文使用授权声明}
-    \end{center}
-    \vspace{0.5in}
-    { \linespread{1.5}
-      东南大学、中国科学技术信息研究所、国家图书馆有权保留本人所送交学位
-      论文的复印件和电子文档，可以采用影印、缩印或其他复制手段保存论文。
-      本人电子文档的内容和纸质论文的内容相一致。除在保密期内的保密论文
-      外，允许论文被查阅和借阅，可以公布（包括刊登）论文的全部或部分内容。
-      论文的公布（包括刊登）授权东南大学研究生院办理。\par}
-    \vspace{0.3in}
-    \begin{flushright}
-      研究生签名：\signline 导师签名：\signline 日~期：\signline
-    \end{flushright}
-    \par
-  }
+
+  \begingroup
+  \setstretch{1.86621}
+
+  \begin{center}
+    \zihao{-3}
+    \quad\\
+    \heiti\textbf{东南大学学位论文独创性声明}\par
+  \end{center}
+  \vspace{30bp}
+
+  \begingroup
+  \songti\zihao{5}
+  本人声明所呈交的学位论文是我个人在导师指导下进行的研究工作及取得的
+  研究成果。尽我所知，除了文中特别加以标注和致谢的地方外，论文中不包
+  含其他人已经发表或撰写过的研究成果，也不包含为获得东南大学或其它教
+  育机构的学位或证书而使用过的材料。与我一同工作的同志对本研究所做的
+  任何贡献均已在论文中作了明确的说明并表示了谢意。\par
+  \vspace{39bp}
+
+  \begingroup
+  \setlength\parindent{10.28em}
+  研究生签名：\signline 日~期：\signline\par
+  \endgroup
+
+  \endgroup
+  \vspace{57bp}
+
+  \begin{center}
+    \zihao{-3}
+    \heiti\textbf{东南大学学位论文使用授权声明}\par
+  \end{center}
+  \vspace{30bp}
+
+  \begingroup
+  \songti\zihao{5}
+  东南大学、中国科学技术信息研究所、国家图书馆、《中国学术期刊（光盘版）》电
+  子杂志社有限公司、万方数据电子出版社、北京万方数据股份有限公司有权保留本人所
+  送交学位论文的复印件和电子文档，可以采用影印、缩印或其他复制手段保存论文。本人
+  电子文档的内容和纸质论文的内容相一致。除在保密期内的保密论文外，允许论文被查阅
+  和借阅，可以公布（包括以电子信息形式刊登）论文的全部内容或中、英文摘要等部分内
+  容。论文的公布（包括以电子信息形式刊登）授权东南大学研究生院办理。\par
+  \vspace{39bp}
+
+  \begingroup
+  \raggedleft
+  研究生签名：\signline 导师签名：\signline 日~期：\signline\par
+  \endgroup
+
+  \endgroup
+
+  \endgroup
+  \restoregeometry
 }
 
 \newcommand\makecover{%
