@@ -358,8 +358,8 @@
     \vspace{51.75bp}
     {
       \setstretch{1.19312}
-      \zihao{2}\heiti\bfseries{\@title}\newline
-      \zihao{2}\heiti\bfseries{\@subtitle}\par
+      \zihao{2}\heiti\textbf{\@title}\\
+      \zihao{2}\heiti\textbf{\@subtitle}\par
     }
     \vspace{36bp}
     {
