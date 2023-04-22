@@ -204,6 +204,13 @@
   \fancyhead[CO]{\zihao{-5}\nomname}
   \fancyfoot[CO,CE]{\thepage}
 }
+% Redefine the plain page style
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[CE]{\zihao{-5}\universityname{}\@thesistype}%
+  \fancyhead[CO]{\zihao{-5}\leftmark}%
+  \fancyfoot[CO,CE]{\thepage}%
+}
 % 设置目录
 \setlength{\cftbeforechapskip}{0pt}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
