@@ -122,12 +122,24 @@
   % 设置粗体的粗细程度 该宏命令仅对随后定义的 CJK 字体有效
   \xeCJKsetemboldenfactor{1}
   \setCJKfamilyfont{zhhei}{Heiti SC Medium}[AutoFakeBold,AutoFakeSlant]
+  % 封面字体
+  \setCJKfamilyfont{zhongsong}{STSong}[
+    BoldFont={STSong},
+    BoldFeatures={FakeBold=4},
+    AutoFakeSlant]
+  \newcommand*{\zhongsong}{\CJKfamily{zhongsong}}
 \else
   % ctex在win下的mainfont加粗为黑体且斜体为楷体
   \setCJKmainfont{SimSun}[AutoFakeBold,AutoFakeSlant]
   \setCJKfamilyfont{zhsong}{SimSun}[AutoFakeBold,AutoFakeSlant]
   \xeCJKsetemboldenfactor{1}
   \setCJKfamilyfont{zhhei}{SimHei}[AutoFakeBold,AutoFakeSlant]
+  % 封面字体
+  \setCJKfamilyfont{zhongsong}{STZhongsong}[
+    BoldFont={STZhongsong},
+    BoldFeatures={FakeBold=1},
+    AutoFakeSlant]
+  \newcommand*{\zhongsong}{\CJKfamily{zhongsong}}
 \fi
 \setmainfont[Mapping=tex-text]{Times New Roman}
 % 中文格式
@@ -312,16 +324,6 @@
   \renewcommand{\@reviewerA}{#1}
   \renewcommand{\@reviewerB}{#2}
 }
-\newcommand{\CoverTopOption}[3][s]{
-\makebox[1.5cm][#1]{\zihao{-5} #2}:{
-\underline{\makebox[1.5cm][c]{\zihao{-5} #3}}}
-}
-\newcommand{\CoverBottomOption}[3][4.5cm]{
-  \makebox[7cm][s]{
-    {\songti\zihao{-4}#2}
-    \underline{\makebox[#1][c]{\heiti\zihao{-4}#3}}
-  }
-}
 \newcommand\@seuthesisthanks{ }
 \newcommand\seuthesisthanks[1]{
   \renewcommand\@seuthesisthanks{#1}
@@ -337,6 +339,107 @@
     pdfsubject={\@title \@subtitle},
     pdfcreator={\@author},
     pdfproducer={XeLaTeX}}
+}
+
+% 封面
+\newcommand{\CoverTopOption}[3][s]{
+\setlength\parindent{-1.71\ccwd}
+\makebox[1.5cm][#1]{\zihao{-5} #2}:{
+\underline{\makebox[1.5cm][c]{\zihao{-5} #3}}}
+\par
+}
+\newcommand{\CoverBottomOption}[3][4.5cm]{
+  \makebox[197bp][s]{
+    {\songti\zihao{-4}#2}
+    \underline{\makebox[#1][c]{\heiti\zihao{-4}#3}
+      \hspace*{-9bp}}
+  }
+}
+\newcommand{\makecolorcover}{
+
+  \thispagestyle{empty}
+
+  \setstretch{1.08333}
+
+  \AddToShipoutPictureBG*{\setlength{\unitlength}{1pt}\put(0,651){%
+      \parbox{\paperwidth}{\centering\includegraphics[width=523pt, height=300pt]{figures/front-cover.jpg}}}}%
+  \AddToShipoutPictureBG*{\setlength{\unitlength}{1pt}\put(202,760.5){%
+      \parbox{\paperwidth}{\centering\includegraphics[width=57pt, height=57pt]{figures/seu-color-logo.png}}}}%
+
+  ~\par
+  {
+    \CoverTopOption{\schoolcodepre}{\schoolcode}
+    \CoverTopOption{\categorynumberpre}{\@categorynumber}
+    \CoverTopOption{\secretlevelpre}{\@secretlevel}
+    \CoverTopOption{U D C}{\@UDC}
+    \CoverTopOption{\studentidpre}{\@studentid}
+  }
+
+  \begin{center}
+    \ifseut@opt@engineering
+      \vspace{141bp}
+      \zhongsong\zihao{-0}\textbf{工程\seut@dagree@zh 学位论文}
+      \vspace{24bp}
+    \else
+      \vspace{157.5bp}
+      \ifseut@opt@master
+        \includegraphics[width=269pt, height=34.5pt]{figures/master.png}
+      \else
+        \includegraphics[width=269pt, height=34.5pt]{figures/doctor.png}
+      \fi
+      \vspace{18bp}
+    \fi
+    \par
+    \zihao{1}\heiti\@title\\
+    \zihao{1}\heiti\@subtitle
+  \end{center}
+
+  \vspace{20bp}
+
+  \begin{center}
+    \setlength{\tabcolsep}{0pt}
+    \renewcommand{\arraystretch}{2.0}
+    \begin{tabular}{cr}
+      \makebox[109bp][s]{
+      \zihao{-2}\songti\authorpre：}  &
+      \underline{
+      \makebox[109bp][c]{\zihao{-2}\heiti\@author}}      \\
+      \makebox[109bp][s]{
+      \zihao{-2}\songti\advisorpre：} &
+      \underline{
+      \makebox[109bp][c]{\zihao{-2}\heiti\@advisorname}} \\
+      \makebox[109bp][s]{~}          &
+      \ifseut@opt@coadvisor
+        \underline{\makebox[109bp][c]{\zihao{-2}\heiti\@coadvisorname}}
+      \else
+      \fi
+    \end{tabular}
+  \end{center}
+
+  \begin{center}
+    \setlength{\tabcolsep}{0pt}
+    \renewcommand{\arraystretch}{2.0}
+    \begin{tabular}{ll}
+      \CoverBottomOption{\appdegreepre}{\@degreetype\seut@dagree@zh}   &
+      \CoverBottomOption{\authorizeorganizationpre}{\@authorizeorganization} \\
+      \CoverBottomOption{\majorpre}{\@major}                           &
+      \CoverBottomOption{\defenddatepre}{\@defenddate}                       \\
+      \CoverBottomOption{\submajorpre}{\@submajor}                     &
+      \CoverBottomOption{\authorizedatepre}{\@authorizedate}                 \\
+      \CoverBottomOption[4.05cm]{\committeechairpre}{\@committeechair} &
+      \CoverBottomOption{\reviewerpre}{\@reviewerA}                          \\
+      ~                                                                &
+      \CoverBottomOption{\makebox[2.55cm]{}}{\@reviewerB}                    \\
+      ~                                                                &
+      ~
+    \end{tabular}
+  \end{center}
+
+  \vfill
+  \setcounter{page}{1}
+  {\songti\zihao{4}\centerline{\today} \par}
+
+  \clearpage\thispagestyle{empty}\cleardoublepage%
 }
 
 % 中文页面
@@ -516,6 +619,8 @@
 \newcommand\makecover{%
   % 设置文档信息
   \seut@setpdfinfo
+  % 封面
+  \makecolorcover
   % 中文页面
   \makechinesecover
   \clearpage\thispagestyle{empty}\cleardoublepage
