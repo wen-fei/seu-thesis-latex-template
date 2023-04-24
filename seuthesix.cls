@@ -195,20 +195,20 @@
 % 摘要和目录等内容的页脚为居中、连续的大写罗马数字页码。
 \fancypagestyle{seustyle}{%
   \fancyhf{}
-  \fancyhead[CE]{\zihao{-5}\universityname{}\@thesistype}
+  \fancyhead[CE]{\zihao{-5}\@seut@string@univzh{}\@seut@string@thesistype}
   \fancyhead[CO]{\zihao{-5}\leftmark}
   \fancyfoot[CO,CE]{\thepage}
 }
 \fancypagestyle{nom}{%
   \fancyhf{}
-  \fancyhead[CE]{\zihao{-5}\universityname{}\@thesistype}
+  \fancyhead[CE]{\zihao{-5}\@seut@string@univzh{}\@seut@string@thesistype}
   \fancyhead[CO]{\zihao{-5}\nomname}
   \fancyfoot[CO,CE]{\thepage}
 }
 % Redefine the plain page style
 \fancypagestyle{plain}{%
   \fancyhf{}%
-  \fancyhead[CE]{\zihao{-5}\universityname{}\@thesistype}%
+  \fancyhead[CE]{\zihao{-5}\@seut@string@univzh{}\@seut@string@thesistype}%
   \fancyhead[CO]{\zihao{-5}\leftmark}%
   \fancyfoot[CO,CE]{\thepage}%
 }
@@ -216,12 +216,6 @@
 \setlength{\cftbeforechapskip}{0pt}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftchapfont}{\songti}
-
-%% 导入配置
-
-\InputIfFileExists{seuthesix.cfg}
-{\typeout{[seuthesix]: Load seuthesix.cfg successfully!}}%
-{\typeout{[seuthesix]: Load seuthesix.cfg failed!}}%
 
 %% 定义常量和变量
 
@@ -239,6 +233,7 @@
 % 设置符号表Title
 \newcommand{\setnomname}[1]{\renewcommand\nomname{#1}}
 
+\newcommand{\@degreelevel}{}
 \ifseut@opt@master
   \newcommand{\seut@dagree@zh}{硕士}
   \newcommand{\seut@dagree@en}{Master}
@@ -290,38 +285,34 @@
   \renewcommand{\@coadvisornameeng}{#3}
   \renewcommand{\@coadvisortitleeng}{#4}
 }
-\newcommand{\@categorynumber}{}
-\newcommand{\categorynumber}[1]{\renewcommand{\@categorynumber}{#1}}
-\newcommand{\@secretlevel}{}
-\newcommand{\secretlevel}[1]{\renewcommand{\@secretlevel}{#1}}
+\newcommand{\@seut@string@cateno}{}
+\newcommand{\categorynumber}[1]{\renewcommand{\@seut@string@cateno}{#1}}
+\newcommand{\@seut@string@secretlevel}{}
+\newcommand{\secretlevel}[1]{\renewcommand{\@seut@string@secretlevel}{#1}}
 \newcommand{\@UDC}{}
 \newcommand{\UDC}[1]{\renewcommand{\@UDC}{#1}}
 \newcommand{\@studentid}{}
 \newcommand{\studentid}[1]{\renewcommand{\@studentid}{#1}}
+\newcommand{\@degreetype}{工学硕士}
+\newcommand{\@degreetypeen}{Master of Engineering}
 \newcommand\degreetype[2]{\renewcommand\@degreetype{#1}%
   \renewcommand\@degreetypeen{#2}}
-\newcommand{\@majorlen}{8em}
-\newcommand{\@major}{}
-\newcommand{\major}[2][8em]{
-  \renewcommand{\@majorlen}{#1}
-  \renewcommand{\@major}{#2}
+\newcommand{\@seut@string@major}{}
+\newcommand{\major}[1]{
+  \renewcommand{\@seut@string@major}{#1}
 }
-\newcommand{\@department}{}
-\newcommand{\@departmenteng}{}
-\newcommand{\department}[2]{
-  \renewcommand{\@department}{#1}
-  \renewcommand{\@departmenteng}{#2}
-}
-\newcommand{\@submajor}{}
+\newcommand{\@seut@string@submajor}{}
 \newcommand{\submajor}[1]{
-  \renewcommand{\@submajor}{#1}
+  \renewcommand{\@seut@string@submajor}{#1}
+}
+\newcommand{\@seut@string@deptzh}{}
+\newcommand{\@seut@string@depten}{}
+\newcommand{\department}[2]{
+  \renewcommand{\@seut@string@deptzh}{#1}
+  \renewcommand{\@seut@string@depten}{#2}
 }
 \newcommand{\@defenddate}{}
 \newcommand{\defenddate}[1]{\renewcommand{\@defenddate}{#1}}
-\newcommand{\authorizeorganization}[1]{
-  \renewcommand{\@authorizeorganization}{#1}
-}
-
 \newcommand{\@authorizedate}{}
 \newcommand{\authorizedate}[1]{\renewcommand{\@authorizedate}{#1}}
 \newcommand{\@committeechair}{}
@@ -332,18 +323,21 @@
   \renewcommand{\@reviewerA}{#1}
   \renewcommand{\@reviewerB}{#2}
 }
-\newcommand\@seuthesisthanks{ }
+\newcommand\@seut@string@thank{ }
 \newcommand\seuthesisthanks[1]{
-  \renewcommand\@seuthesisthanks{#1}
+  \renewcommand\@seut@string@thank{#1}
   \seut@opt@thankstrue
 }
+\newcommand{\@seut@string@univzh}{东南大学}
+\newcommand{\@seut@string@univen}{Southeast University}
+\newcommand{\@seut@string@thesistype}{\@degreelevel{}学位论文}
 
 %% 插入页面
 
 % 文档信息
 \newcommand*{\seut@setpdfinfo}{\hypersetup{%
     pdfauthor={\@author},
-    pdftitle={\universityname{}\@thesistype},
+    pdftitle={\@seut@string@univzh{}\@seut@string@thesistype},
     pdfsubject={\@title \@subtitle},
     pdfcreator={\@author},
     pdfproducer={XeLaTeX}}
@@ -363,6 +357,7 @@
       \hspace*{-9bp}}
   }
 }
+\newcommand{\@seut@string@pyr}{评\hspace{1.5em}阅\hspace{1.5em}人}
 \newcommand{\makecolorcover}{
 
   \thispagestyle{empty}
@@ -376,11 +371,11 @@
 
   ~\par
   {
-    \CoverTopOption{\schoolcodepre}{\schoolcode}
-    \CoverTopOption{\categorynumberpre}{\@categorynumber}
-    \CoverTopOption{\secretlevelpre}{\@secretlevel}
+    \CoverTopOption{学校代码}{10286}
+    \CoverTopOption{分类号}{\@seut@string@cateno}
+    \CoverTopOption{密级}{\@seut@string@secretlevel}
     \CoverTopOption{U D C}{\@UDC}
-    \CoverTopOption{\studentidpre}{\@studentid}
+    \CoverTopOption{学号}{\@studentid}
   }
 
   \begin{center}
@@ -409,11 +404,11 @@
     \renewcommand{\arraystretch}{2.0}
     \begin{tabular}{cr}
       \makebox[109bp][s]{
-      \zihao{-2}\songti\authorpre：}  &
+      \zihao{-2}\songti 研究生姓名：}      &
       \underline{
       \makebox[109bp][c]{\zihao{-2}\heiti\@author}}      \\
       \makebox[109bp][s]{
-      \zihao{-2}\songti\advisorpre：} &
+      \zihao{-2}\songti 导~~师~~姓~~名：} &
       \underline{
       \makebox[109bp][c]{\zihao{-2}\heiti\@advisorname}} \\
       \makebox[109bp][s]{~}          &
@@ -428,17 +423,17 @@
     \setlength{\tabcolsep}{0pt}
     \renewcommand{\arraystretch}{2.0}
     \begin{tabular}{ll}
-      \CoverBottomOption{\appdegreepre}{\@degreetype\seut@dagree@zh}   &
-      \CoverBottomOption{\authorizeorganizationpre}{\@authorizeorganization} \\
-      \CoverBottomOption{\majorpre}{\@major}                           &
-      \CoverBottomOption{\defenddatepre}{\@defenddate}                       \\
-      \CoverBottomOption{\submajorpre}{\@submajor}                     &
-      \CoverBottomOption{\authorizedatepre}{\@authorizedate}                 \\
-      \CoverBottomOption[4.05cm]{\committeechairpre}{\@committeechair} &
-      \CoverBottomOption{\reviewerpre}{\@reviewerA}                          \\
-      ~                                                                &
-      \CoverBottomOption{\makebox[2.55cm]{}}{\@reviewerB}                    \\
-      ~                                                                &
+      \CoverBottomOption{申请学位类别}{\@degreetype\seut@dagree@zh} &
+      \CoverBottomOption{学位授予单位}{~~东~南~大~学~~}                   \\
+      \CoverBottomOption{一级学科名称}{\@seut@string@major}         &
+      \CoverBottomOption{论文答辩日期}{\@defenddate}                  \\
+      \CoverBottomOption{二级学科名称}{\@seut@string@submajor}      &
+      \CoverBottomOption{学位授予日期}{\@authorizedate}               \\
+      \CoverBottomOption[4.05cm]{答辩委员会主席}{\@committeechair}   &
+      \CoverBottomOption{\@seut@string@pyr}{\@reviewerA}        \\
+      ~                                                       &
+      \CoverBottomOption{\makebox[2.55cm]{}}{\@reviewerB}       \\
+      ~                                                       &
       ~
     \end{tabular}
   \end{center}
@@ -477,15 +472,15 @@
       \setlength{\tabcolsep}{0pt}
       \renewcommand{\arraystretch}{1.5962}
       \begin{tabular}{rl}
-        \zihao{3}\heiti\textbf{专~~业~~名~~称：}  &
-        \zihao{3}\songti\underline{\textbf{\@major}}                         \\
+        \zihao{3}\heiti\textbf{专~~业~~名~~称：} &
+        \zihao{3}\songti\underline{\textbf{\@seut@string@major}}             \\
         \\
-        \zihao{3}\heiti\textbf{\authorpre：}  &
+        \zihao{3}\heiti\textbf{研究生姓名：}      &
         \zihao{3}\songti\underline{\textbf{\@author}}                        \\
         \\
-        \zihao{3}\heiti\textbf{\advisorpre：} &
+        \zihao{3}\heiti\textbf{导~~师~~姓~~名：} &
         \zihao{3}\songti\underline{\textbf{\@advisorname\,\,\@advisortitle}} \\
-                                             &
+                                            &
         \ifseut@opt@coadvisor
           \zihao{3}\songti\underline{\textbf{\@coadvisorname\,\,\@coadvisortitle}}
         \fi
@@ -500,12 +495,13 @@
     \vspace{6bp}
     {
       \setstretch{1.25}
-      \noindent\zihao{5}\songti\@seuthesisthanks\par
+      \noindent\zihao{5}\songti\@seut@string@thank\par
     }
   \fi
 }
 
 % 英文页面
+\newcommand{\todayeng}{\the\year/\the\month/\the\day}
 \newcommand{\makeenglishcover}{%
   \thispagestyle{empty}
   \begin{center}
@@ -530,7 +526,7 @@
       Dissertation
     \fi
     submitted to}\\
-    {\universitynameeng}\\
+    {\@seut@string@univen}\\
     {For the
     \ifseut@opt@engineering
       Professional
@@ -558,8 +554,8 @@
     \quad\\
     \fi
     \quad\\
-    {\@departmenteng}\\
-    {\universitynameeng}\\
+    {\@seut@string@depten}\\
+    {\@seut@string@univen}\\
     {\todayeng}
     \par
     }%
@@ -567,6 +563,7 @@
 }
 
 % 独创性声明
+\newcommand{\signline}{\underline{\makebox[2.5cm][s]{}}}
 \newcommand{\seudeclare}{
   \thispagestyle{empty}
 
@@ -650,7 +647,7 @@
   \newcommand{\@keywords}{#1}
   \hypersetup{pdfkeywords={\@keywords}}
   \phantomsection
-  \chapter{\@abstracttitle}
+  \chapter{摘要}
 }
 {
   \par
