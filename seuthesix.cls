@@ -233,25 +233,6 @@
 % 设置符号表Title
 \newcommand{\setnomname}[1]{\renewcommand\nomname{#1}}
 
-\newcommand{\@degreelevel}{}
-\ifseut@opt@master
-  \newcommand{\seut@dagree@zh}{硕士}
-  \newcommand{\seut@dagree@en}{Master}
-  \ifseut@opt@engineering
-    \renewcommand\@degreelevel{工程硕士}
-  \else
-    \renewcommand\@degreelevel{硕士}
-  \fi
-\else
-  \ifseut@opt@phd
-    \newcommand{\seut@dagree@zh}{博士}
-    \newcommand{\seut@dagree@en}{Doctor}
-    \renewcommand\@degreelevel{博士}
-  \else
-    \ClassError{seuthesix}{No degree was selected.}{}
-  \fi
-\fi
-
 \renewcommand{\author}[2]{
   \def\@author{#1}
   \newcommand{\@authoreng}{#2}
@@ -293,10 +274,20 @@
 \newcommand{\UDC}[1]{\renewcommand{\@UDC}{#1}}
 \newcommand{\@studentid}{}
 \newcommand{\studentid}[1]{\renewcommand{\@studentid}{#1}}
-\newcommand{\@degreetype}{工学硕士}
-\newcommand{\@degreetypeen}{Master of Engineering}
-\newcommand\degreetype[2]{\renewcommand\@degreetype{#1}%
+
+\ifseut@opt@master
+  \newcommand{\seut@dagree@zh}{硕士}
+  \newcommand{\seut@dagree@en}{Master}
+\else
+  \newcommand{\seut@dagree@zh}{博士}
+  \newcommand{\seut@dagree@en}{Doctor}
+\fi
+\newcommand{\@degreetypezh}{工学}
+\newcommand{\@degreetypeen}{Engineering}
+\newcommand\degreetype[2]{\renewcommand\@degreetypezh{#1}%
   \renewcommand\@degreetypeen{#2}}
+\newcommand{\@degreelevel}{\@degreetypezh\seut@dagree@zh}
+
 \newcommand{\@seut@string@major}{}
 \newcommand{\major}[1]{
   \renewcommand{\@seut@string@major}{#1}
@@ -381,7 +372,7 @@
   \begin{center}
     \ifseut@opt@engineering
       \vspace{141bp}
-      \zhongsong\zihao{-0}\textbf{工程\seut@dagree@zh 学位论文}
+      \zhongsong\zihao{-0}\textbf{\@degreelevel{}学位论文}
       \vspace{24bp}
     \else
       \vspace{157.5bp}
@@ -423,17 +414,25 @@
     \setlength{\tabcolsep}{0pt}
     \renewcommand{\arraystretch}{2.0}
     \begin{tabular}{ll}
-      \CoverBottomOption{申请学位类别}{\@degreetype\seut@dagree@zh} &
-      \CoverBottomOption{学位授予单位}{~~东~南~大~学~~}                   \\
-      \CoverBottomOption{一级学科名称}{\@seut@string@major}         &
-      \CoverBottomOption{论文答辩日期}{\@defenddate}                  \\
-      \CoverBottomOption{二级学科名称}{\@seut@string@submajor}      &
-      \CoverBottomOption{学位授予日期}{\@authorizedate}               \\
-      \CoverBottomOption[4.05cm]{答辩委员会主席}{\@committeechair}   &
-      \CoverBottomOption{\@seut@string@pyr}{\@reviewerA}        \\
-      ~                                                       &
-      \CoverBottomOption{\makebox[2.55cm]{}}{\@reviewerB}       \\
-      ~                                                       &
+      \CoverBottomOption{申请学位类别}{\@degreelevel}             &
+      \CoverBottomOption{学位授予单位}{~~东~南~大~学~~}                 \\
+      \ifseut@opt@engineering
+        \CoverBottomOption[5.4cm]{领域名称}{\@seut@string@major}
+      \else
+        \CoverBottomOption{一级学科名称}{\@seut@string@major}
+      \fi                                                   &
+      \CoverBottomOption{论文答辩日期}{\@defenddate}                \\
+      \ifseut@opt@engineering
+        \CoverBottomOption[5.4cm]{研究方向}{\@seut@string@submajor}
+      \else
+        \CoverBottomOption{二级学科名称}{\@seut@string@submajor}
+      \fi                                                   &
+      \CoverBottomOption{学位授予日期}{\@authorizedate}             \\
+      \CoverBottomOption[4.05cm]{答辩委员会主席}{\@committeechair} &
+      \CoverBottomOption{\@seut@string@pyr}{\@reviewerA}      \\
+      ~                                                     &
+      \CoverBottomOption{\makebox[2.55cm]{}}{\@reviewerB}     \\
+      ~                                                     &
       ~
     \end{tabular}
   \end{center}
