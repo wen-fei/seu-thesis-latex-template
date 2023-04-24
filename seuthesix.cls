@@ -163,6 +163,7 @@
   subsection/beforeskip=6bp,
   subsection/afterskip=6bp%
 }
+\setlength{\parskip}{0pt}
 % 表格文字可用小五宋体或正文字体，居中（或居左）并整齐划一，表格名及图名用五号宋体
 \captionsetup{font=small}
 % 每一表应有简短确切的题名，连同表号置于表上。
