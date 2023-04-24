@@ -170,6 +170,9 @@
 \captionsetup[table]{position=above}
 % 每一图应有简短确切的题名，连同图号置于图下。
 \captionsetup[figure]{position=below}
+\newcommand{\dashnumber}[2]%
+  {{#1}\kern.07em\rule[.5ex]{.4em}{.15ex}\kern.07em{#2}}
+\renewcommand*{\thefigure}{\dashnumber{\thechapter}{\arabic{figure}}}
 % 设置超链接格式
 \ifseut@opt@nocolorlinks
   \hypersetup{colorlinks=false}
