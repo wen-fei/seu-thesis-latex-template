@@ -171,7 +171,7 @@
 % 每一图应有简短确切的题名，连同图号置于图下。
 \captionsetup[figure]{position=below}
 \newcommand{\dashnumber}[2]%
-  {{#1}\kern.07em\rule[.5ex]{.4em}{.15ex}\kern.07em{#2}}
+{{#1}\kern.07em\rule[.5ex]{.4em}{.15ex}\kern.07em{#2}}
 \renewcommand*{\thefigure}{\dashnumber{\thechapter}{\arabic{figure}}}
 % 设置超链接格式
 \ifseut@opt@nocolorlinks
@@ -339,19 +339,18 @@
 
 % 封面
 \newcommand{\CoverTopOption}[3][s]{
-\setlength\parindent{-1.71\ccwd}
-\makebox[1.5cm][#1]{\zihao{-5} #2}:{
-\underline{\makebox[1.5cm][c]{\zihao{-5} #3}}}
+\setlength\parindent{-1.71\ccwd}%
+\makebox[1.5cm][#1]{\zihao{-5} #2}:%
+{\underline{\makebox[1.5cm][c]{\zihao{-5} #3}}}%
 \par
 }
 \newcommand{\CoverBottomOption}[3][4.5cm]{
-  \makebox[197bp][s]{
+  \makebox[200bp][s]{
     {\songti\zihao{-4}#2}
     \underline{\makebox[#1][c]{\heiti\zihao{-4}#3}
       \hspace*{-9bp}}
   }
 }
-\newcommand{\@seut@string@pyr}{评\hspace{1.5em}阅\hspace{1.5em}人}
 \newcommand{\makecolorcover}{
 
   \thispagestyle{empty}
@@ -365,11 +364,11 @@
 
   ~\par
   {
-    \CoverTopOption{学校代码}{10286}
-    \CoverTopOption{分类号}{\@seut@string@cateno}
-    \CoverTopOption{密级}{\@seut@string@secretlevel}
-    \CoverTopOption{U D C}{\@UDC}
-    \CoverTopOption{学号}{\@studentid}
+    \CoverTopOption{学\hfil 校\hfil 代\hfil 码}{10286}
+    \CoverTopOption{分\hfil 类\hfil 号}{\@seut@string@cateno}
+    \CoverTopOption{密\hfil 级}{\@seut@string@secretlevel}
+    \CoverTopOption{U\hfil D\hfil C}{\@UDC}
+    \CoverTopOption{学\hfil 号}{\@studentid}
   }
 
   \begin{center}
@@ -397,17 +396,17 @@
     \setlength{\tabcolsep}{0pt}
     \renewcommand{\arraystretch}{2.0}
     \begin{tabular}{cr}
-      \makebox[109bp][s]{
+      \makebox[110bp][s]{
       \zihao{-2}\songti 研究生姓名：}      &
       \underline{
-      \makebox[109bp][c]{\zihao{-2}\heiti\@author}}      \\
-      \makebox[109bp][s]{
+      \makebox[110bp][c]{\zihao{-2}\heiti\@author}}      \\
+      \makebox[110bp][s]{
       \zihao{-2}\songti 导~~师~~姓~~名：} &
       \underline{
-      \makebox[109bp][c]{\zihao{-2}\heiti\@advisorname}} \\
-      \makebox[109bp][s]{~}          &
+      \makebox[110bp][c]{\zihao{-2}\heiti\@advisorname}} \\
+      \makebox[110bp][s]{~\hfil}     &
       \ifseut@opt@coadvisor
-        \underline{\makebox[109bp][c]{\zihao{-2}\heiti\@coadvisorname}}
+        \underline{\makebox[110bp][c]{\zihao{-2}\heiti\@coadvisorname}}
       \else
       \fi
     \end{tabular}
@@ -420,19 +419,19 @@
       \CoverBottomOption{申请学位类别}{\@degreelevel}             &
       \CoverBottomOption{学位授予单位}{~~东~南~大~学~~}                 \\
       \ifseut@opt@engineering
-        \CoverBottomOption[5.4cm]{领域名称}{\@seut@string@major}
+        \CoverBottomOption[152pt]{领域名称}{\@seut@string@major}
       \else
         \CoverBottomOption{一级学科名称}{\@seut@string@major}
       \fi                                                   &
       \CoverBottomOption{论文答辩日期}{\@defenddate}                \\
       \ifseut@opt@engineering
-        \CoverBottomOption[5.4cm]{研究方向}{\@seut@string@submajor}
+        \CoverBottomOption[152pt]{研究方向}{\@seut@string@submajor}
       \else
         \CoverBottomOption{二级学科名称}{\@seut@string@submajor}
       \fi                                                   &
       \CoverBottomOption{学位授予日期}{\@authorizedate}             \\
       \CoverBottomOption[4.05cm]{答辩委员会主席}{\@committeechair} &
-      \CoverBottomOption{\@seut@string@pyr}{\@reviewerA}      \\
+      \CoverBottomOption{评\hfil 阅\hfil 人}{\@reviewerA}        \\
       ~                                                     &
       \CoverBottomOption{\makebox[2.55cm]{}}{\@reviewerB}     \\
       ~                                                     &
