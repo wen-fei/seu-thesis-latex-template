@@ -324,7 +324,7 @@
 }
 \newcommand{\@seut@string@univzh}{东南大学}
 \newcommand{\@seut@string@univen}{Southeast University}
-\newcommand{\@seut@string@thesistype}{\@degreelevel{}学位论文}
+\newcommand{\@seut@string@thesistype}{\seut@dagree@zh{}学位论文}
 
 %% 插入页面
 
