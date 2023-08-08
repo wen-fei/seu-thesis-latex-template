@@ -113,16 +113,6 @@
 
   Latex数学公式在线编辑器：[链接](https://www.codecogs.com/latex/eqneditor.php?lang=zh-cn)
 
-* 多出空白页问题
-
-  由于模板限制奇偶页，会生成多余的空白页。可以通过如下命令去掉空白页生成：
-
-  ```latex
-  \let\cleardoublepage\clearpage % 去除空白页
-  ```
-
-  放在章节命令之前，或\begin{abstract}等也可以。
-
 * 其他问题
 
   基本问题都能搜索的到解决方案，善用搜索引擎。

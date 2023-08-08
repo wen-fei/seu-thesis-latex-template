@@ -54,7 +54,7 @@
 \ProcessOptions
 
 %% 加载基类
-\LoadClass[a4paper]{book}
+\LoadClass[a4paper, openany]{book}
 
 %% 加载宏包
 
@@ -676,14 +676,10 @@
 }
 
 \renewcommand*{\tableofcontents}{%
-  \if@twocolumn
-    \@restonecoltrue\onecolumn
-  \else
-    \@restonecolfalse
-  \fi
+  \cleardoublepage
+  \phantomsection
   \chapter{\contentsname}%
   \@starttoc{toc}%
-  \if@restonecol\twocolumn\fi
 }
 
 \newcommand\listofothers{%
