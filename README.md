@@ -14,9 +14,8 @@
 
 * figures: 图片目录
 * seuthesix.cls: 核心配置文件
-* gbt7714-2005.bst：[《GB/T 7714-2005: 文后参考文献著录规则》](https://github.com/Haixing-Hu/GBT7714-2005-BibTeX-Style)
 
-其他文件大多为编译生成的，如果要新建自己的项目，拷贝这3个主要文件和图片目录即可。
+其他文件大多为编译生成的，如果要新建自己的项目，拷贝这2个主要文件和图片目录即可。
 
 样例文件说明如下：
 
@@ -39,6 +38,12 @@
 文章基本结构（见`sample.tex`）：
 
 ```latex
+
+% 源加载参考文献数据
+\addbibresource[location=local]{sample.bib}
+
+\begin{document}
+
 % 中英文页面和独创性声明
 \makecover
 
@@ -65,12 +70,14 @@
 
 % 致谢
 \acknowledgement
-% 参考文献
-\thesisbib{xxx}
+% 打印参考文献
+\thesisbib
 % 附录
 \appendix
 % 作者简介
 \resume
+
+\end{document}
 ```
 
 宏包说明：
@@ -78,6 +85,15 @@
 * [ctex](https://ctan.org/tex-archive/language/chinese/ctex): 中文环境
 * [setspace](https://ctan.org/pkg/setspace) 设置局部行距
 * [tocloft](https://ctan.org/pkg/tocloft) 设置目录
+
+## 编译
+
+```shell
+xelatex --synctex=1 sample.tex 
+biber sample
+xelatex --synctex=1 sample.tex
+xelatex --synctex=1 sample.tex
+```
 
 ## 常见问题以及解决办法
 
@@ -124,5 +140,5 @@
 
 2. [SEUThesis](https://github.com/JosanSun/SEUThesis)
 
-3. [GBT7714-2005-BibTeX-Style](https://github.com/Haixing-Hu/GBT7714-2005-BibTeX-Style)
+3. [biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015)
 

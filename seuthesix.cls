@@ -96,9 +96,7 @@
 \numberwithin{algorithm}{chapter}
 \floatname{algorithm}{算法}
 \renewcommand{\listalgorithmname}{算法目录}
-% Flexible bibliography support
-\RequirePackage[super,square]{natbib}
-% 可根据交叉引用生成超链接
+% 可根据交叉引用生成超链接 在biblatex前加载
 \RequirePackage{hyperref}
 % 支持自定义页眉页脚
 \RequirePackage{fancyhdr}
@@ -111,6 +109,8 @@
 % word只空余在文字下方 latex空余在文字上下两侧
 % 目前没有对于行距的要求 选择合适的即可
 \RequirePackage[zihao=-4,heading=true,linespread=1.35417]{ctex}
+% 加载biblatex宏包，使用参考文献
+\RequirePackage[backend=biber,style=gb7714-2015]{biblatex}
 
 %% 基本配置
 
@@ -233,8 +233,6 @@
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\sinc}{sinc}
 \DeclareMathOperator{\unwrap}{unwrap}
-% 参考文献引用指令
-\newcommand\citen[1]{[\!\!\citenum{#1}]}
 % 设置符号表Title
 \newcommand{\setnomname}[1]{\renewcommand\nomname{#1}}
 
@@ -721,12 +719,11 @@
   \chapter{致 谢}
 }
 
-\newcommand{\thesisbib}[1]{%
-  \bibliographystyle{gbt7714-2005}
+\newcommand{\thesisbib}{%
   \cleardoublepage
   \phantomsection
   \addcontentsline{toc}{chapter}{\bibname}
-  \bibliography{#1}
+  \printbibliography
 }
 
 \newcommand{\resume}{%

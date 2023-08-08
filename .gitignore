@@ -1,11 +1,16 @@
 *.aux
 *.bbl
+*.bcf
 *.blg
+*.fdb_latexmk
+*.fls
 *.loa
 *.lof
 *.log
 *.lot
 *.nlo
 *.out
-*.toc
+*.run.xml
 *.synctex.gz
+*.toc
+*.xdv

@@ -1,5 +1,7 @@
 \documentclass[algorithmlist, figurelist,tablelist, nomlist,masters]{seuthesix}
 
+% biblatex宏包的参考文献数据源加载方式
+\addbibresource[location=local]{sample.bib}
 
 \begin{document}
 \categorynumber{000} % 分类采用《中国图书资料分类法》
@@ -174,7 +176,7 @@ Marshall[48]等人开发的RobotReviewer3系统能从临床试验报告中自动
 \end{figure}
 
 \section{灵犀一指要诀}
-灵犀一指是一种以柔制刚的武功，一般人很难领悟其中的精妙之处，因此很难学会。\cite{lxf:a}\citen{lxf:b}
+灵犀一指是一种以柔制刚的武功，一般人很难领悟其中的精妙之处，因此很难学会。\cite{lxf:a}\cite{lxf:b}
 实际上，它的要诀就是将内力汇聚在手指经脉之内，提高内力的密度，然后在瞬间释放出来，以致达到将敌人兵器折断的力道。
 如表\ref{lxfinsight}所示。
 \begin{table}
@@ -229,7 +231,7 @@ E=mc^2
 \acknowledgement
 感谢每一个给予帮助的人。
 
-\thesisbib{sample}
+\thesisbib
 
 
 \appendix
