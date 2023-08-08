@@ -91,8 +91,8 @@
 \renewcommand{\nomname}{术语与数学符号约定}
 % float wrapper for algorithms
 \RequirePackage{algorithm}
-% first algorithm typesetting environment
-\RequirePackage{algorithmic}
+% layout for algorithmicx
+\RequirePackage{algpseudocode}
 \numberwithin{algorithm}{chapter}
 \floatname{algorithm}{算法}
 \renewcommand{\listalgorithmname}{算法目录}
