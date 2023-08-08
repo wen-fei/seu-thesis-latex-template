@@ -72,6 +72,8 @@
 \RequirePackage[titles]{tocloft}
 % 处理浮动图形和表格的标题样式
 \RequirePackage{caption}
+% 设置时间格式。
+\RequirePackage[en-US]{datetime2}
 % amsmath 宏包提供数学公式支持
 \RequirePackage{amsmath}
 % amsthm 宏包支持自定义数学定理环境
@@ -502,7 +504,6 @@
 }
 
 % 英文页面
-\newcommand{\todayeng}{\the\year/\the\month/\the\day}
 \newcommand{\makeenglishcover}{%
   \thispagestyle{empty}
   \begin{center}
@@ -557,7 +558,10 @@
     \quad\\
     {\@seut@string@depten}\\
     {\@seut@string@univen}\\
-    {\todayeng}
+    {
+    \DTMlangsetup{showdayofmonth=false}
+    \DTMdisplaydate{\the\year}{\the\month}{\the\day}{-1}
+    }
     \par
     }%
   \end{center}%
