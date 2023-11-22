@@ -72,6 +72,7 @@
 \RequirePackage[titles]{tocloft}
 % 处理浮动图形和表格的标题样式
 \RequirePackage{caption}
+\RequirePackage{subcaption}
 % 设置时间格式。
 \RequirePackage[en-US]{datetime2}
 % amsmath 宏包提供数学公式支持
@@ -167,7 +168,8 @@
 }
 \setlength{\parskip}{0pt}
 % 表格文字可用小五宋体或正文字体，居中（或居左）并整齐划一，表格名及图名用五号宋体
-\captionsetup{font=small}
+\captionsetup{font=small, labelsep=space}
+\captionsetup[sub]{font=small, labelsep=space}
 % 每一表应有简短确切的题名，连同表号置于表上。
 \captionsetup[table]{position=above}
 % 每一图应有简短确切的题名，连同图号置于图下。
