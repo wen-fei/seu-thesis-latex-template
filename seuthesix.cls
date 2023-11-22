@@ -316,9 +316,11 @@
 \newcommand{\committeechair}[1]{\renewcommand{\@committeechair}{#1}}
 \newcommand{\@reviewerA}{}
 \newcommand{\@reviewerB}{}
-\newcommand{\reviewer}[2]{
+\newcommand{\@reviewerC}{}
+\newcommand{\reviewer}[3]{
   \renewcommand{\@reviewerA}{#1}
   \renewcommand{\@reviewerB}{#2}
+  \renewcommand{\@reviewerC}{#3}
 }
 \newcommand\@seut@string@thank{ }
 \newcommand\seuthesisthanks[1]{
@@ -438,7 +440,11 @@
       ~                                                     &
       \CoverBottomOption{\makebox[2.55cm]{}}{\@reviewerB}     \\
       ~                                                     &
-      ~
+      \ifseut@opt@phd
+        \CoverBottomOption{\makebox[2.55cm]{}}{\@reviewerC}%
+      \else
+        ~
+      \fi
     \end{tabular}
   \end{center}
 
