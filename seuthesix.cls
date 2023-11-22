@@ -172,9 +172,9 @@
 \captionsetup{font=small, labelsep=space}
 \captionsetup[sub]{font=small, labelsep=space}
 % 每一表应有简短确切的题名，连同表号置于表上。
-\captionsetup[table]{position=above}
+\captionsetup[table]{position=above, justification=centering}
 % 每一图应有简短确切的题名，连同图号置于图下。
-\captionsetup[figure]{position=below}
+\captionsetup[figure]{position=below, justification=centering}
 \newcommand{\dashnumber}[2]%
 {{#1}\kern.07em\rule[.5ex]{.4em}{.15ex}\kern.07em{#2}}
 \renewcommand*{\thefigure}{\dashnumber{\thechapter}{\arabic{figure}}}
