@@ -155,6 +155,7 @@
   % 一级标题（题目）：二号宋体居中
   % 二级标题（章）：三号黑体居中
   chapter/format=\centering\zihao{3}\heiti,
+  chapter/fixskip=true,
   chapter/beforeskip=8bp,
   chapter/afterskip=16bp,
   % 三级标题（节）：四号宋体（加粗）居左
