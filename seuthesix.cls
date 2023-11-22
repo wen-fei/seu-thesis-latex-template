@@ -111,7 +111,7 @@
 % 目前没有对于行距的要求 选择合适的即可
 \RequirePackage[zihao=-4,heading=true,linespread=1.35417]{ctex}
 % 加载biblatex宏包，使用参考文献
-\RequirePackage[backend=biber,style=gb7714-2015]{biblatex}
+\RequirePackage[backend=biber,style=gb7714-2015,doi=false]{biblatex}
 
 %% 基本配置
 
