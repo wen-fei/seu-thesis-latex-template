@@ -477,16 +477,16 @@
       \renewcommand{\arraystretch}{1.5962}
       \begin{tabular}{rl}
         \zihao{3}\heiti\textbf{专~~业~~名~~称：} &
-        \zihao{3}\songti\underline{\textbf{\@seut@string@major}}             \\
+        \zihao{3}\songti\underline{\makebox[3cm][c]{\textbf{\@seut@string@major}}} \\
         \\
         \zihao{3}\heiti\textbf{研究生姓名：}      &
-        \zihao{3}\songti\underline{\textbf{\@author}}                        \\
+        \zihao{3}\songti\underline{\makebox[3cm][c]{\textbf{\@author}}}            \\
         \\
         \zihao{3}\heiti\textbf{导~~师~~姓~~名：} &
-        \zihao{3}\songti\underline{\textbf{\@advisorname\,\,\@advisortitle}} \\
+        \zihao{3}\songti\underline{\makebox[3cm][c]{\textbf{\@advisorname}}}       \\
                                             &
         \ifseut@opt@coadvisor
-          \zihao{3}\songti\underline{\textbf{\@coadvisorname\,\,\@coadvisortitle}}
+          \zihao{3}\songti\underline{\makebox[3cm][c]{\textbf{\@coadvisorname}}}
         \fi
       \end{tabular}
     }
