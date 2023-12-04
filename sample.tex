@@ -1,9 +1,9 @@
 \documentclass[algorithmlist, figurelist,tablelist, nomlist,masters]{seuthesix}
 
+% biblatex宏包的参考文献数据源加载方式
+\addbibresource[location=local]{sample.bib}
 
 \begin{document}
-\bibliographystyle{seuthesix}  % 告诉编译器所用参考文献样式
-\bibliography{seuthesix}  % 告诉编译器参考文献所在文件
 \categorynumber{000} % 分类采用《中国图书资料分类法》
 \UDC{000}            %《国际十进分类法UDC》的类号
 \secretlevel{公开}    %学位论文密级分为"公开"、"内部"、"秘密"和"机密"四种
@@ -12,17 +12,21 @@
 \author{陆小凤}{Phoenix Land, Jr.}
 \advisor{夜帝}{教授}{King Night}{Prof.}
 \coadvisor{楚留香}{副教授}{Perfume Tsu}{Associate Prof.} % 没有% 可以不填
- \degreetype{武学硕士}{Master of kung fu} % 详细学位名称
+ \degreetype{武学}{kung fu} % 详细学位名称
 \major{内功}
 \submajor{内功心法}
 \defenddate{\today}
 \authorizedate{\today}
 \committeechair{夜帝}
-\reviewer{张三丰}{黄药师}
+\reviewer{张三丰}{黄药师}{}
 \department{东南大学武学院}{School of kung fu}
 \seuthesisthanks{本课题的研究获郭靖-黄蓉降龙基金、杨过-小龙女黯然销魂基金以及郭襄的倚天基金资助}
-\makebigcover
+
 \makecover
+
+%% 正文前的内容
+\frontmatter
+
 \begin{abstract}{武功，心法，内功，灵犀一指}
 灵犀一指是一种非常厉害的武功。
 \end{abstract}
@@ -35,6 +39,7 @@
 \tableofcontents
 \listofothers
 
+%% 正文
 \mainmatter
 
 \chapter{绪论}
@@ -171,7 +176,7 @@ Marshall[48]等人开发的RobotReviewer3系统能从临床试验报告中自动
 \end{figure}
 
 \section{灵犀一指要诀}
-灵犀一指是一种以柔制刚的武功，一般人很难领悟其中的精妙之处，因此很难学会。\cite{lxf:a}\citen{lxf:b}
+灵犀一指是一种以柔制刚的武功，一般人很难领悟其中的精妙之处，因此很难学会。\cite{lxf:a}\cite{lxf:b}
 实际上，它的要诀就是将内力汇聚在手指经脉之内，提高内力的密度，然后在瞬间释放出来，以致达到将敌人兵器折断的力道。
 如表\ref{lxfinsight}所示。
 \begin{table}
@@ -197,10 +202,10 @@ Marshall[48]等人开发的RobotReviewer3系统能从临床试验报告中自动
 \begin{algorithm}
 \caption{\label{algoinsight}灵犀一指要诀}
 \begin{algorithmic}[1]
-\STATE 气聚丹田。
-\STATE 将丹田之气注入手指经脉。
-\STATE 瞬间释放。
-\STATE 将敌人制服。
+\State 气聚丹田。
+\State 将丹田之气注入手指经脉。
+\State 瞬间释放。
+\State 将敌人制服。
 \end{algorithmic}
 \end{algorithm}
 
@@ -220,10 +225,13 @@ E=mc^2
 本文介绍了灵犀一指的起源，重要性和其中的要诀。
 本章对全文工作进行了回顾和总结。
 
+%% 正文后的内容
+\backmatter
+
 \acknowledgement
 感谢每一个给予帮助的人。
 
-\thesisbib{seuthesix}
+\thesisbib
 
 
 \appendix
@@ -264,7 +272,7 @@ q^2&=2m^2.
 表明$q$也为偶数，因此它们有公共因子$2$。这与它们既约的假设矛盾。定理得证。\qed
 \end{theorem}
 
-\resume{作者攻读硕士学位期间的研究成果}
+\resume
 \begin{flushleft}
 {\bfseries \large 发表的论文}\\ \relax
 [1] 第一作者，“灵犀一指：理论与应用”, 武侠学报，
